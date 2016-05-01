@@ -1,0 +1,14 @@
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\C# Tutorial\FindTWR\FindTWR\bin\Debug\FindTWR.exe.config
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\C# Tutorial\FindTWR\FindTWR\bin\Debug\FindTWR.exe
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\C# Tutorial\FindTWR\FindTWR\bin\Debug\FindTWR.pdb
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\C# Tutorial\FindTWR\FindTWR\obj\Debug\FindTWR.exe
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\C# Tutorial\FindTWR\FindTWR\obj\Debug\FindTWR.pdb
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\C# Tutorial\FindTWR\FindTWR\obj\Debug\FindTWR.csprojResolveAssemblyReference.cache
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindTWR\FindTWR\bin\Debug\FindTWR.exe.config
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindTWR\FindTWR\obj\Debug\FindTWR.exe
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindTWR\FindTWR\obj\Debug\FindTWR.pdb
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindTWR\FindTWR\bin\Debug\FindTWR.exe
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindTWR\FindTWR\bin\Debug\FindTWR.pdb
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindTWR\FindTWR\obj\Debug\FindTWR.csprojResolveAssemblyReference.cache
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindTWR\FindTWR\bin\Debug\KSP Library.dll
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindTWR\FindTWR\bin\Debug\KSP Library.pdb

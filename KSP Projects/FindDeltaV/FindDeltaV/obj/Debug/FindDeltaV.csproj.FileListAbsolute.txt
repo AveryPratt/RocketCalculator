@@ -1,0 +1,8 @@
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindDeltaV\FindDeltaV\bin\Debug\FindDeltaV.exe.config
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindDeltaV\FindDeltaV\bin\Debug\FindDeltaV.exe
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindDeltaV\FindDeltaV\bin\Debug\FindDeltaV.pdb
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindDeltaV\FindDeltaV\obj\Debug\FindDeltaV.csprojResolveAssemblyReference.cache
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindDeltaV\FindDeltaV\obj\Debug\FindDeltaV.exe
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindDeltaV\FindDeltaV\obj\Debug\FindDeltaV.pdb
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindDeltaV\FindDeltaV\bin\Debug\KSP Library.dll
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\FindDeltaV\FindDeltaV\bin\Debug\KSP Library.pdb
