@@ -49,6 +49,24 @@ namespace RocketryWebApp {
         protected global::System.Web.UI.WebControls.CheckBox TWRCheckBox;
         
         /// <summary>
+        /// IspCheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox IspCheckBox;
+        
+        /// <summary>
+        /// ThrustCheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ThrustCheckBox;
+        
+        /// <summary>
         /// ParentBodyDropDownList control.
         /// </summary>
         /// <remarks>
@@ -56,6 +74,24 @@ namespace RocketryWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ParentBodyDropDownList;
+        
+        /// <summary>
+        /// MinTWRCheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox MinTWRCheckBox;
+        
+        /// <summary>
+        /// MaxTWRCheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox MaxTWRCheckBox;
         
         /// <summary>
         /// SetStagesButton control.
@@ -74,5 +110,14 @@ namespace RocketryWebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table RocketTable;
+        
+        /// <summary>
+        /// CalculateButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CalculateButton;
     }
 }
