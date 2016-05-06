@@ -31,3 +31,5 @@ C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\obj\Debug\RocketryWebApp.csprojResolveAssemblyReference.cache
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\obj\Debug\RocketryWebApp.dll
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\obj\Debug\RocketryWebApp.pdb
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\KSP Library.dll
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\KSP Library.pdb

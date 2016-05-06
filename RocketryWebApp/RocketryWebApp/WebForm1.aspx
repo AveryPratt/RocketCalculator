@@ -8,45 +8,49 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-    
-        How many stages is your rocket?<br />
-        <asp:TextBox ID="StageNumberTextBox" runat="server" MaxLength="2" OnTextChanged="StageNumberTextBox_TextChanged" Width="30px"></asp:TextBox>
-    
-    </div>
-        <asp:CheckBox ID="DeltaVCheckBox" runat="server" OnCheckedChanged="DeltaVCheckBox_CheckedChanged" Text="Find ΔV" />
-        <p>
-            <asp:CheckBox ID="TWRCheckBox" runat="server" AutoPostBack="True" OnCheckedChanged="TWRCheckBox_CheckedChanged" Text="Find TWR" />
-        </p>
-        <asp:DropDownList ID="ParentBodyDropDownList" runat="server" Enabled="False" Height="16px" OnSelectedIndexChanged="ParentBodyDropDownList_SelectedIndexChanged">
-            <asp:ListItem Value="1">Kerbol</asp:ListItem>
-            <asp:ListItem Value="2">Moho</asp:ListItem>
-            <asp:ListItem Value="3">Eve</asp:ListItem>
-            <asp:ListItem Value="4">Gilly</asp:ListItem>
-            <asp:ListItem Selected="True" Value="5">Kerbin</asp:ListItem>
-            <asp:ListItem Value="6">Mun</asp:ListItem>
-            <asp:ListItem Value="7">Minmus</asp:ListItem>
-            <asp:ListItem Value="8">Duna</asp:ListItem>
-            <asp:ListItem Value="9">Ike</asp:ListItem>
-            <asp:ListItem Value="10">Dres</asp:ListItem>
-            <asp:ListItem Value="11">Jool</asp:ListItem>
-            <asp:ListItem Value="12">Laythe</asp:ListItem>
-            <asp:ListItem Value="13">Vall</asp:ListItem>
-            <asp:ListItem Value="14">Tylo</asp:ListItem>
-            <asp:ListItem Value="15">Bop</asp:ListItem>
-            <asp:ListItem Value="16">Pol</asp:ListItem>
-            <asp:ListItem Value="17">Eeloo</asp:ListItem>
+        <div>
+            How many stages is your rocket?<br />
+            <asp:TextBox ID="StageNumberTextBox" runat="server" MaxLength="2" Width="30px" />
+
+            <br />
+            Find:</div>
+        <asp:CheckBox ID="DeltaVCheckBox" runat="server" Text="ΔV" Checked="True" AutoPostBack="True" />
+            <asp:CheckBox ID="TWRCheckBox" runat="server" Text="TWR" Checked="True" AutoPostBack="True" />
+            <asp:CheckBox ID="IspCheckBox" runat="server" Text="Isp" Checked="True" AutoPostBack="True" />
+            <asp:CheckBox ID="ThrustCheckBox" runat="server" Text="Thrust" Checked="True" AutoPostBack="True" />
+        <br />
+        <br />
+        TWR:<p>
+        <asp:DropDownList ID="ParentBodyDropDownList" runat="server" Enabled="False" Height="16px" AutoPostBack="True">
+            <asp:ListItem Value="1" Text="Kerbol" />
+            <asp:ListItem Value="2" Text="Moho" />
+            <asp:ListItem Value="3" Text="Eve" />
+            <asp:ListItem Value="4" Text="Gilly" />
+            <asp:ListItem Value="5" Text="Kerbin" Selected="True" />
+            <asp:ListItem Value="6" Text="Mun" />
+            <asp:ListItem Value="7" Text="Minmus" />
+            <asp:ListItem Value="8" Text="Duna" />
+            <asp:ListItem Value="9" Text="Ike" />
+            <asp:ListItem Value="10" Text="Dres" />
+            <asp:ListItem Value="11" Text="Jool" />
+            <asp:ListItem Value="12" Text="Laythe" />
+            <asp:ListItem Value="13" Text="Vall" />
+            <asp:ListItem Value="14" Text="Tylo" />
+            <asp:ListItem Value="15" Text="Bop" />
+            <asp:ListItem Value="16" Text="Pol" />
+            <asp:ListItem Value="17" Text="Eeloo" />
         </asp:DropDownList>
+            <asp:CheckBox ID="MinTWRCheckBox" runat="server" Text="min" Checked="True" AutoPostBack="True" />
+            <asp:CheckBox ID="MaxTWRCheckBox" runat="server" Text="max" Checked="True" AutoPostBack="True" />
+        </p>
         <p>
             <asp:Button ID="SetStagesButton" runat="server" OnClick="SetStagesButton_Clicked" Text="Create Rocket" />
         </p>
-        <asp:Table ID="RocketTable" runat="server" Visible="False">
-            <asp:TableHeaderRow>
-                <asp:TableHeaderCell Text="My Rocket:" />
-                <asp:TableCell runat="server" Text="Δv" Visible="False" />
-                <asp:TableCell runat="server" Text="TWR" Visible="False" />
-            </asp:TableHeaderRow>
+        <asp:Table ID="RocketTable" runat="server" GridLines="Both">
         </asp:Table>
+        <p>
+            <asp:Button ID="CalculateButton" runat="server" OnClientClick="CalculateButton_Clicked" Text="Calculate" Visible="False" />
+        </p>
     </form>
 </body>
 </html>
