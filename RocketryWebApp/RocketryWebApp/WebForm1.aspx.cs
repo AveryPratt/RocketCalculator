@@ -8,332 +8,381 @@ using KSP_Library;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Text;
 
 namespace RocketryWebApp
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        // determines total number of stages being displayed
         int StageNumber;
+        // determines RocketTable visibility (altered in Page_Load() and setTable() methods)
+        bool ShowStages;
+        #region Columns
+        TableCell[] wetMassColumn = new TableCell[10];
+        TableCell[] dryMassColumn = new TableCell[10];
+        TableCell[] thrustColumn = new TableCell[10];
+        TableCell[] ispColumn = new TableCell[10];
+        TableCell[] minTWRColumn = new TableCell[10];
+        TableCell[] maxTWRColumn = new TableCell[10];
+        TableCell[] deltaVColumn = new TableCell[10];
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Write("Welcome to Rocket Planner");
-
-            // initializes StageNumber to 0 or retrieves from ViewState
             if (!IsPostBack)
             {
-                StageNumber = 0;
+                // hides RocketTable until SetStagesButton is clicked
+                ShowStages = false;
+                ViewState["ShowStages"] = ShowStages;
             }
             else
             {
-                StageNumber = (int)ViewState["Rows"];
+                // determines if RocketTable is visible
+                ShowStages = (bool)ViewState["ShowStages"];
             }
 
-            // creates a new TableRow in RocketTable for each stage number
-            for (int i = 0; i < StageNumber + 1; i++)
+            // sets StageNumber to TextBox.Text if text is of type int
+            // sets StageNumber to 0 and gives error message if TextBox.Text is not of type int
+            bool IsStageNumberInt = int.TryParse(StageNumberTextBox.Text, out StageNumber);
+            if (!IsStageNumberInt && IsPostBack)
             {
-                RocketTable.Rows.Add(new TableRow());
+                Response.Write("Unrecognized number of stages.");
+                StageNumber = 0;
             }
-
-            foreach (TableRow myStage in RocketTable.Rows)
-            {
-                // creates TableCells for stage properties
-                TableCell stageNameCell, wetMassCell, dryMassCell, thrustCell, ispCell, minTWRCell, maxTWRCell, deltaVCell;
-                stageNameCell = new TableCell();
-                wetMassCell = new TableCell();
-                dryMassCell = new TableCell();
-                thrustCell = new TableCell();
-                ispCell = new TableCell();
-                minTWRCell = new TableCell();
-                maxTWRCell = new TableCell();
-                deltaVCell = new TableCell();
-
-                // adds TableCells to the current TableRow
-                myStage.Cells.Add(stageNameCell);
-                myStage.Cells.Add(wetMassCell);
-                myStage.Cells.Add(dryMassCell);
-                myStage.Cells.Add(thrustCell);
-                myStage.Cells.Add(ispCell);
-                myStage.Cells.Add(minTWRCell);
-                myStage.Cells.Add(maxTWRCell);
-                myStage.Cells.Add(deltaVCell);
-
-                // hides TableCells by default
-                wetMassCell.Visible = false;
-                dryMassCell.Visible = false;
-                thrustCell.Visible = false;
-                ispCell.Visible = false;
-                minTWRCell.Visible = false;
-                maxTWRCell.Visible = false;
-                deltaVCell.Visible = false;
-
-                // hard codes the header row TableCells
-                if (RocketTable.Rows.GetRowIndex(myStage).ToString() == "0")
-                {
-                    stageNameCell.Text = "Rocket Stages:";
-                    wetMassCell.Text = "Wet Mass:";
-                    dryMassCell.Text = "Dry Mass:";
-                    thrustCell.Text = "Thrust:";
-                    ispCell.Text = "Isp:";
-                    minTWRCell.Text = "Min. TWR:";
-                    maxTWRCell.Text = "Max. TWR:";
-                    deltaVCell.Text = "Δv";
-                }
-                else
-                {
-                    // creates TextBoxes to populate TableCells
-                    TextBox wetMassTextBox, dryMassTextBox, thrustTextBox, ispTextBox, minTWRTextBox, maxTWRTextBox, deltaVTextBox;
-                    wetMassTextBox = new TextBox();
-                    dryMassTextBox = new TextBox();
-                    thrustTextBox = new TextBox();
-                    ispTextBox = new TextBox();
-                    minTWRTextBox = new TextBox();
-                    maxTWRTextBox = new TextBox();
-                    deltaVTextBox = new TextBox();
-
-                    // populates TableCells with TextBoxes
-                    stageNameCell.Text = "Stage " + RocketTable.Rows.GetRowIndex(myStage).ToString() + ":";
-                    wetMassCell.Controls.Add(wetMassTextBox);
-                    dryMassCell.Controls.Add(dryMassTextBox);
-                    thrustCell.Controls.Add(thrustTextBox);
-                    ispCell.Controls.Add(ispTextBox);
-                    minTWRCell.Controls.Add(minTWRTextBox);
-                    maxTWRCell.Controls.Add(maxTWRTextBox);
-                    deltaVCell.Controls.Add(deltaVTextBox);
-
-                    // creates ViewStates for each TableCell's contents
-                    ViewState["thrustViewState" + RocketTable.Rows.GetRowIndex(myStage).ToString()] = thrustTextBox.Text;
-                    ViewState["dryMassViewState" + RocketTable.Rows.GetRowIndex(myStage).ToString()] = dryMassTextBox.Text;
-                    ViewState["wetMassViewState" + RocketTable.Rows.GetRowIndex(myStage).ToString()] = wetMassTextBox.Text;
-                    ViewState["ispViewState" + RocketTable.Rows.GetRowIndex(myStage).ToString()] = ispTextBox.Text;
-                    ViewState["minTWRViewState" + RocketTable.Rows.GetRowIndex(myStage).ToString()] = maxTWRTextBox.Text;
-                    ViewState["maxTWRViewState" + RocketTable.Rows.GetRowIndex(myStage).ToString()] = minTWRTextBox.Text;
-                    ViewState["deltaVViewState" + RocketTable.Rows.GetRowIndex(myStage).ToString()] = deltaVTextBox.Text;
-                }
-
-                // enables ParentBodyDropDownList and min/max CheckBoxes only when TWRCheckBox is checked
-
-                if (TWRCheckBox.Checked == true)
-                {
-                    ParentBodyDropDownList.Enabled = true;
-                    MinTWRCheckBox.Enabled = true;
-                    MaxTWRCheckBox.Enabled = true;
-                }
-                else
-                {
-                    ParentBodyDropDownList.Enabled = false;
-                    MinTWRCheckBox.Enabled = false;
-                    MaxTWRCheckBox.Enabled = false;
-                }
-
-                // makes TableCells visible according to which CheckBoxes are checked
-                if (DeltaVCheckBox.Checked || 
-                    (MinTWRCheckBox.Checked && 
-                    MinTWRCheckBox.Enabled == true) || 
-                    IspCheckBox.Checked || 
-                    ThrustCheckBox.Checked)
-                {
-                    wetMassCell.Visible = true;
-                }
-                if (DeltaVCheckBox.Checked ||
-                    (MaxTWRCheckBox.Checked && 
-                    MaxTWRCheckBox.Enabled == true) || 
-                    IspCheckBox.Checked || 
-                    ThrustCheckBox.Checked)
-                {
-                    dryMassCell.Visible = true;
-                }
-                if (DeltaVCheckBox.Checked || 
-                    IspCheckBox.Checked)
-                {
-                    ispCell.Visible = true;
-                }
-                if ((MinTWRCheckBox.Checked && 
-                    MinTWRCheckBox.Enabled == true) || 
-                    ThrustCheckBox.Checked)
-                {
-                    minTWRCell.Visible = true;
-                }
-                if ((MaxTWRCheckBox.Checked && 
-                    MaxTWRCheckBox.Enabled == true) || 
-                    ThrustCheckBox.Checked)
-                {
-                    maxTWRCell.Visible = true;
-                }
-                if (DeltaVCheckBox.Checked || 
-                    IspCheckBox.Checked)
-                {
-                    deltaVCell.Visible = true;
-                }
-            }
-            // end "foreach(TableRow)" segment
-
-            // shows CalculateButton if stages are present
-            if (StageNumber > 0)
-            {
-                CalculateButton.Visible = true;
-            }
-            // saves stageNumber as ViewState
-            ViewState["Rows"] = StageNumber;
+            // initializes RocketTable visibility to false;
+            RocketTable.Visible = false;
         }
+
+        // determines which stage variables in RocketTable are being set by user and which are being calculated
+        #region CheckBox Logic
+
+        //  CheckedChanged events all invoke setTable() method and postback
+        protected void DeltaVCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            IspCheckBox.Checked = false;
+            setTable();
+        }
+        protected void IspCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            DeltaVCheckBox.Checked = false;
+            setTable();
+        }
+        protected void TWRCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            ThrustCheckBox.Checked = false;
+            TWRSettings();
+            setTable();
+        }
+        protected void ThrustCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            TWRCheckBox.Checked = false;
+            TWRSettings();
+            setTable();
+        }
+        protected void MinTWRCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            setTable();
+        }
+        protected void MaxTWRCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            setTable();
+        }
+
+        // enables ParentBodyDropDownList and min/max CheckBoxes only when TWRCheckBox is checked
+        private void TWRSettings()
+        {
+            if (TWRCheckBox.Checked || ThrustCheckBox.Checked)
+            {
+                ParentBodyDropDownList.Enabled = true;
+                MinTWRCheckBox.Enabled = true;
+                MaxTWRCheckBox.Enabled = true;
+            }
+            else
+            {
+                ParentBodyDropDownList.Enabled = false;
+                MinTWRCheckBox.Enabled = false;
+                MaxTWRCheckBox.Enabled = false;
+            }
+        }
+        #endregion
 
         protected void SetStagesButton_Clicked(object sender, EventArgs e)
         {
-            bool isStageNumberInt = Int32.TryParse(StageNumberTextBox.Text, out StageNumber);
-
-            // saves stageNumber as ViewState
-            ViewState["Rows"] = StageNumber;
+            ShowStages = true;
+            ViewState["ShowStages"] = ShowStages;
+            setTable();
         }
 
+        // configures RocketTable visibility and enablement specifications provided by StageNumber (int), ShowStages (bool), and CheckBoxes
+        // Each TextBox in RocketTable has its own ID and ViewState.
+        private void setTable()
+        {
+            #region Row Visibility
+            foreach (TableRow row in RocketTable.Rows)
+            {
+                // default visibility
+                if (RocketTable.Rows.GetRowIndex(row) == 0)
+                {
+                    row.Visible = true;
+                }
+                else { row.Visible = false; }
 
+                for (int i = 0; i < StageNumber + 1; i++)
+                {
+                    if (RocketTable.Rows.GetRowIndex(row) == i)
+                    {
+                        row.Visible = true;
+                    }
+                }
+            }
+            #endregion
+            #region Columns
 
+            foreach (TableRow row in RocketTable.Rows)
+            {
+                // ============== USE SWITCH ==============
 
+                foreach (TableCell cell in row.Cells)
+                {
+                    if (row.Cells.GetCellIndex(cell) == 0)
+                    {
+                        continue;
+                    }
+                    if (row.Cells.GetCellIndex(cell) == 1)
+                    {
+                        wetMassColumn[RocketTable.Rows.GetRowIndex(row)] = cell;
+                    }
+                    else if (row.Cells.GetCellIndex(cell) == 2)
+                    {
+                        dryMassColumn[RocketTable.Rows.GetRowIndex(row)] = cell;
+                    }
+                    else if (row.Cells.GetCellIndex(cell) == 3)
+                    {
+                        thrustColumn[RocketTable.Rows.GetRowIndex(row)] = cell;
+                    }
+                    else if (row.Cells.GetCellIndex(cell) == 4)
+                    {
+                        ispColumn[RocketTable.Rows.GetRowIndex(row)] = cell;
+                    }
+                    else if (row.Cells.GetCellIndex(cell) == 5)
+                    {
+                        minTWRColumn[RocketTable.Rows.GetRowIndex(row)] = cell;
+                    }
+                    else if (row.Cells.GetCellIndex(cell) == 6)
+                    {
+                        maxTWRColumn[RocketTable.Rows.GetRowIndex(row)] = cell;
+                    }
+                    else if (row.Cells.GetCellIndex(cell) == 7)
+                    {
+                        deltaVColumn[RocketTable.Rows.GetRowIndex(row)] = cell;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+            }
+            #endregion
+            #region Column Visibility
+            // default visibility
+            foreach (TableCell cell in wetMassColumn) { cell.Visible = true; }
+            foreach (TableCell cell in dryMassColumn) { cell.Visible = true; }
+            foreach (TableCell cell in thrustColumn) { cell.Visible = false; }
+            foreach (TableCell cell in ispColumn) { cell.Visible = false; }
+            foreach (TableCell cell in minTWRColumn) { cell.Visible = false; }
+            foreach (TableCell cell in maxTWRColumn) { cell.Visible = false; }
+            foreach (TableCell cell in deltaVColumn) { cell.Visible = false; }
 
+            // TWR & Thrust
+            if (TWRCheckBox.Checked || ThrustCheckBox.Checked)
+            {
+                if (MinTWRCheckBox.Checked)
+                {
+                    foreach (TableCell cell in minTWRColumn) { cell.Visible = true; }
+                }
+                if (MaxTWRCheckBox.Checked)
+                {
+                    foreach (TableCell cell in maxTWRColumn) { cell.Visible = true; }
+                }
+                foreach (TableCell cell in thrustColumn) { cell.Visible = true; }
+            }
+
+            // Isp & DeltaV
+            if (IspCheckBox.Checked || DeltaVCheckBox.Checked)
+            {
+                foreach (TableCell cell in deltaVColumn) { cell.Visible = true; }
+                foreach (TableCell cell in ispColumn) { cell.Visible = true; }
+            }
+            #endregion
+            #region Column Enabling
+            // default enabling
+            foreach (TableCell cell in wetMassColumn) { cell.Enabled = true; }
+            foreach (TableCell cell in dryMassColumn) { cell.Enabled = true; }
+            foreach (TableCell cell in thrustColumn) { cell.Enabled = true; }
+            foreach (TableCell cell in ispColumn) { cell.Enabled = true; }
+            foreach (TableCell cell in minTWRColumn) { cell.Enabled = true; }
+            foreach (TableCell cell in maxTWRColumn) { cell.Enabled = true; }
+            foreach (TableCell cell in deltaVColumn) { cell.Enabled = true; }
+
+            // Thrust
+            if (ThrustCheckBox.Checked)
+            {
+                foreach (TableCell cell in thrustColumn) { cell.Enabled = false; }
+                foreach (TableCell cell in minTWRColumn) { cell.Enabled = true; }
+                foreach (TableCell cell in maxTWRColumn) { cell.Enabled = true; }
+            }
+            if (TWRCheckBox.Checked)
+            {
+                // MinTWR
+                if (MinTWRCheckBox.Checked)
+                {
+                    foreach (TableCell cell in minTWRColumn) { cell.Enabled = false; }
+                }
+                // MaxTWR
+                if (MaxTWRCheckBox.Checked)
+                {
+                    foreach (TableCell cell in maxTWRColumn) { cell.Enabled = false; }
+                }
+                foreach (TableCell cell in thrustColumn) { cell.Enabled = true; }
+            }
+            // Isp & DeltaV
+            if (IspCheckBox.Checked)
+            {
+                foreach (TableCell cell in ispColumn) { cell.Enabled = false; }
+            }
+            if (DeltaVCheckBox.Checked)
+            {
+                foreach (TableCell cell in deltaVColumn) { cell.Enabled = false; }
+            }
+            #endregion
+            #region Table Visibility
+            // shows {StageNumber} stages when SetStagesButton is clicked
+            if (ShowStages)
+            {
+                RocketTable.Visible = true;
+                CalculateButton.Visible = true;
+            }
+            #endregion
+        }
 
         protected void CalculateButton_Clicked(object sender, EventArgs e)
         {
-            //// checks to see if stage number is an integer
-            //bool isStageNumberInt = int.TryParse(StageNumberTextBox.Text, out stageNumber);
-            //while (isStageNumberInt == false)
-            //{
-            //    Response.Write("You must enter an integer as the number of stages.");
-            //}
+            setTable();
+            // gets a list of Stages by invocing helper method
+            List<Stage> stageList = getStages();
+            
+            // foreach loop below increments by i
+            int i = 0;
 
-            //stageNumber = (int)ViewState["Rows"];
-            //// recreates table rows
-            //for (int i = 0; i < stageNumber + 1; i++)
-            //{
-            //    RocketTable.Rows.Add(new TableRow());
-            //}
+            // calculates and sets values in TextBoxes according to which CheckBoxes are checked:
+            foreach (Stage stage in stageList)
+            {
+                #region Calculations
+                // DeltaV
+                if (DeltaVCheckBox.Checked)
+                {
+                    string deltaVText = stage.GetDeltaV().ToString();
+                    setTextBoxText(deltaVText, i, deltaVColumn);
+                }
 
-            //foreach (TableRow myStage in RocketTable.Rows)
-            //{
-            //    // recreates table cells
-            //    TableCell stageNameCell, wetMassCell, dryMassCell, thrustCell, ispCell;
-            //    stageNameCell = new TableCell();
-            //    wetMassCell = new TableCell();
-            //    dryMassCell = new TableCell();
-            //    thrustCell = new TableCell();
-            //    ispCell = new TableCell();
+                // Isp
+                if (IspCheckBox.Checked)
+                {
+                    string ispText = stage.GetIsp().ToString();
+                    setTextBoxText(ispText, i, ispColumn);
+                }
 
-            //    // adds cells to the current TableRow
-            //    myStage.Cells.Add(stageNameCell);
-            //    myStage.Cells.Add(wetMassCell);
-            //    myStage.Cells.Add(dryMassCell);
-            //    myStage.Cells.Add(thrustCell);
-            //    myStage.Cells.Add(ispCell);
+                // Thrust
+                if (ThrustCheckBox.Checked)
+                {
+                    if (MinTWRCheckBox.Checked)
+                    {
+                        string thrustText = stage.GetThrustFromMinTWR().ToString();
+                        setTextBoxText(thrustText, i, thrustColumn);
+                    }
+                    else if (MaxTWRCheckBox.Checked)
+                    {
+                        string thrustText = stage.GetThrustFromMaxTWR().ToString();
+                        setTextBoxText(thrustText, i, thrustColumn);
+                    }
+                }
 
-            //    // hides thrust and isp cells
-            //    thrustCell.Visible = false;
-            //    ispCell.Visible = false;
+                if (TWRCheckBox.Checked)
+                {
+                    // Min TWR
+                    if (MinTWRCheckBox.Checked)
+                    {
+                        string minTWRText = stage.GetMinTWR().ToString();
+                        setTextBoxText(minTWRText, i, minTWRColumn);
+                    }
+                    // Max TWR
+                    if (MaxTWRCheckBox.Checked)
+                    {
+                        string maxTWRText = stage.GetMaxTWR().ToString();
+                        setTextBoxText(maxTWRText, i, maxTWRColumn);
+                    }
+                }
+                #endregion
+                i++;
+            }
+        }
 
-            //    // sets the header row
-            //    if (RocketTable.Rows.GetRowIndex(myStage).ToString() == "0")
-            //    {
-            //        stageNameCell.Text = "Rocket Stages:";
-            //        wetMassCell.Text = "Wet Mass:";
-            //        dryMassCell.Text = "Dry Mass:";
-            //        thrustCell.Text = "Thrust:";
-            //        ispCell.Text = "Isp:";
-            //    }
-            //    else
-            //    {
-            //        stageNameCell.Text = "Stage " + RocketTable.Rows.GetRowIndex(myStage).ToString() + ":";
-            //        wetMassCell.Text = (string)ViewState["wetMassViewState" + RocketTable.Rows.GetRowIndex(myStage).ToString()];
-            //        dryMassCell.Text = (string)ViewState["dryMassViewState" + RocketTable.Rows.GetRowIndex(myStage).ToString()];
-            //        thrustCell.Text = (string)ViewState["thrustViewState" + RocketTable.Rows.GetRowIndex(myStage).ToString()];
-            //        ispCell.Text = (string)ViewState["ispViewState" + RocketTable.Rows.GetRowIndex(myStage).ToString()];
-            //    }
+        // gets a List of Stages in which Stage Properties are given by RocketTable text
+        private List<Stage> getStages()
+        {
+            // creates stageList for {StageNumber} Stages
+            List<Stage> stageList = new List<Stage>();
+            for (int i = 0; i < StageNumber; i++)
+            {
+                double wetMass;
+                double dryMass;
+                double thrust;
+                int isp;
+                double minTWR;
+                double maxTWR;
+                double deltaV;
 
-            //    if (TWRCheckBox.Checked)
-            //    {
-            //        // shows thrust cell if TWRCheckBox is checked
-            //        thrustCell.Visible = true;
+                // finds appropriate TextBox.Text and TryParses Text into fields
+                bool IsWetMassDouble = double.TryParse(getTextBoxText(i, wetMassColumn), out wetMass);
+                bool IsDryMassDouble = double.TryParse(getTextBoxText(i, dryMassColumn), out dryMass);
+                bool IsThrustDouble = double.TryParse(getTextBoxText(i, thrustColumn), out thrust);
+                bool IsIspDouble = int.TryParse(getTextBoxText(i, ispColumn), out isp);
+                bool IsMinTWRDouble = double.TryParse(getTextBoxText(i, minTWRColumn), out minTWR);
+                bool IsMaxTWRDouble = double.TryParse(getTextBoxText(i, maxTWRColumn), out maxTWR);
+                bool IsDeltaVDouble = double.TryParse(getTextBoxText(i, deltaVColumn), out deltaV);
 
-            //        // creates TWR cell if TWRCheckBox is checked
-            //        TableCell TWRCell = new TableCell();
+                Stage stage = new Stage("Stage" + (i + 1).ToString())
+                {
+                    WetMass = wetMass,
+                    DryMass = dryMass,
+                    Thrust = thrust,
+                    Isp = isp,
+                    MinTWR = minTWR,
+                    MaxTWR = maxTWR,
+                    DeltaV = deltaV
+                };
+                stageList.Add(stage);
+            }
+            return stageList;
+        }
 
-            //        // adds cell to TableRow
-            //        myStage.Cells.Add(TWRCell);
+        // finds the text associated with a certain stage and property, represented by 'i' and 'tbarray' respectively
+        private string getTextBoxText(int i, TableCell[] tbarray)
+        {
+            StringBuilder varID = new StringBuilder(tbarray[(i + 1)].ID);
+            varID.Remove(0, 2);
+            varID.Insert(0, "TextBox");
+            return ((TextBox)tbarray[(i + 1)].FindControl(varID.ToString())).Text;
+        }
 
-            //        // sets the header row
-            //        if (RocketTable.Rows.GetRowIndex(myStage).ToString() == "0")
-            //        {
-            //            TWRCell.Text = "TWR:";
-            //        }
-            //        else
-            //        {
-            //            TWRCell.Text = "twr";
-            //        }
-            //    }
-
-            //    if (DeltaVCheckBox.Checked)
-            //    {
-            //        // shows thrust cell if TWRCheckBox is checked
-            //        ispCell.Visible = true;
-
-            //        // creates TWR cell if TWRCheckBox is checked
-            //        TableCell DeltaVCell = new TableCell();
-
-            //        // adds cell to TableRow
-            //        myStage.Cells.Add(DeltaVCell);
-
-            //        // sets the header row
-            //        if (RocketTable.Rows.GetRowIndex(myStage).ToString() == "0")
-            //        {
-            //            DeltaVCell.Text = "Δv:";
-            //        }
-            //        else
-            //        {
-            //            DeltaVCell.Text = "deltaV";
-            //        }
-            //    }
-            //}
-
-
-
-
-            // ALSO VERY BAD IDEA ======== VERY VERY VERY BAD IDEA
-
-            //foreach (TableRow myStage in RocketTable.Rows)
-            //{
-            //    if (TWRCheckBox.Checked)
-            //    {
-            //        // creates TWR cell if TWRCheckBox is checked
-            //        TableCell TWRCell = new TableCell();
-
-            //        // adds cell to TableRow
-            //        myStage.Cells.Add(TWRCell);
-
-            //        // sets the header row
-            //        if (RocketTable.Rows.GetRowIndex(myStage).ToString() == "0")
-            //        {
-            //            TWRCell.Text = "TWR:";
-            //        }
-            //        else
-            //        {
-            //            TWRCell.Text = "twr";
-            //        }
-            //    }
-
-            //    if (DeltaVCheckBox.Checked)
-            //    {
-            //        // creates TWR cell if TWRCheckBox is checked
-            //        TableCell DeltaVCell = new TableCell();
-
-            //        // adds cell to TableRow
-            //        myStage.Cells.Add(DeltaVCell);
-
-            //        // sets the header row
-            //        if (RocketTable.Rows.GetRowIndex(myStage).ToString() == "0")
-            //        {
-            //            DeltaVCell.Text = "Δv:";
-            //        }
-            //        else
-            //        {
-            //            DeltaVCell.Text = "deltaV";
-            //        }
-            //    }
-            //}
+        // gives calculated response to appropriate TextBox for output
+        private void setTextBoxText(string text, int i, TableCell[] tbarray)
+        {
+            StringBuilder varID = new StringBuilder(tbarray[(i + 1)].ID);
+            varID.Remove(0, 2);
+            varID.Insert(0, "TextBox");
+            ((TextBox)FindControl(varID.ToString())).Text = text;
         }
     }
 }
