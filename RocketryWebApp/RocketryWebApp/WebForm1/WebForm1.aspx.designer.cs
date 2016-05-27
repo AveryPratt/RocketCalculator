@@ -11,7 +11,7 @@ namespace RocketryWebApp.WebForm1 {
     
     
     public partial class WebForm1 {
-
+        
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -20,7 +20,7 @@ namespace RocketryWebApp.WebForm1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-
+        
         /// <summary>
         /// StageNumberTextBox control.
         /// </summary>
@@ -29,7 +29,7 @@ namespace RocketryWebApp.WebForm1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox StageNumberTextBox;
-
+        
         /// <summary>
         /// DeltaVCheckBox control.
         /// </summary>
