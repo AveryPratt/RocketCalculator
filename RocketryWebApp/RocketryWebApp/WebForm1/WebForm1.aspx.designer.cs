@@ -112,6 +112,15 @@ namespace RocketryWebApp.WebForm1 {
         protected global::System.Web.UI.WebControls.Table RocketTable;
         
         /// <summary>
+        /// HeaderRow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow HeaderRow;
+        
+        /// <summary>
         /// AddStageButton control.
         /// </summary>
         /// <remarks>
@@ -1334,6 +1343,15 @@ namespace RocketryWebApp.WebForm1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button9;
+        
+        /// <summary>
+        /// TotalRow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow TotalRow;
         
         /// <summary>
         /// CalculateButton control.

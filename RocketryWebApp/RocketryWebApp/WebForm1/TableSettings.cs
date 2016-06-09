@@ -14,12 +14,11 @@ namespace RocketryWebApp.WebForm1
 
         }
 
-        public void SetRowVisibility(int stageNumber, Table rocketTable)
+        public void SetRowVisibility(int stageNumber)
         {
-            // sets visibility to true for TableRows within StageNumber
-            foreach (TableRow row in rocketTable.Rows)
+            foreach (TableRow row in RocketTable.Rows)
             {
-                if (rocketTable.Rows.GetRowIndex(row) == 0)
+                if (RocketTable.Rows.GetRowIndex(row) == 0)
                 {
                     row.Visible = true;
                 }
@@ -27,29 +26,97 @@ namespace RocketryWebApp.WebForm1
 
                 for (int i = 0; i < stageNumber + 1; i++)
                 {
-                    if (rocketTable.Rows.GetRowIndex(row) == i)
+                    if (RocketTable.Rows.GetRowIndex(row) == i)
                     {
                         row.Visible = true;
                     }
                 }
             }
         }
+        public void SetColumnVisible(int columnNumber)
+        {
+            foreach (TableRow row in RocketTable.Rows)
+            {
+                foreach (TableCell cell in row.Cells)
+                {
+                    if (row.Cells.GetCellIndex(cell) == columnNumber)
+                    {
+                        cell.Visible = true;
+                    }
+                }
+            }
+        }
+        public void SetColumnInvisible(int columnNumber)
+        {
+            foreach (TableRow row in RocketTable.Rows)
+            {
+                foreach (TableCell cell in row.Cells)
+                {
+                    if (row.Cells.GetCellIndex(cell) == columnNumber)
+                    {
+                        cell.Visible = false;
+                    }
+                }
+            }
+        }
+        public void SetColumnEnabled(int columnNumber)
+        {
+            foreach (TableRow row in RocketTable.Rows)
+            {
+                foreach (TableCell cell in row.Cells)
+                {
+                    if (row.Cells.GetCellIndex(cell) == columnNumber)
+                    {
+                        cell.Enabled = true;
+                    }
+                }
+            }
+        }
+        public void SetColumnDisabled(int columnNumber)
+        {
+            foreach (TableRow row in RocketTable.Rows)
+            {
+                foreach (TableCell cell in row.Cells)
+                {
+                    if (row.Cells.GetCellIndex(cell) == columnNumber)
+                    {
+                        cell.Enabled = false;
+                    }
+                }
+            }
+        }
+        public void SetHeaderColor(int columnNumber, System.Drawing.Color color)
+        {
+            foreach (TableCell cell in HeaderRow.Cells)
+            {
+                if (HeaderRow.Cells.GetCellIndex(cell) == columnNumber)
+                {
+                    cell.ForeColor = color;
+                }
+            }
+        }
+
+        [Obsolete("use integer rather than TableCell[] to represent Table Column")]
         public void SetColumnVisible(TableCell[] column)
         {
             foreach (TableCell cell in column) { cell.Visible = true; }
         }
+        [Obsolete("use integer rather than TableCell[] to represent Table Column")]
         public void SetColumnInvisible(TableCell[] column)
         {
             foreach (TableCell cell in column) { cell.Visible = false; }
         }
+        [Obsolete("use integer rather than TableCell[] to represent Table Column")]
         public void SetColumnEnabled(TableCell[] column)
         {
             foreach (TableCell cell in column) { cell.Enabled = true; }
         }
+        [Obsolete("use integer rather than TableCell[] to represent Table Column")]
         public void SetColumnDisabled(TableCell[] column)
         {
             foreach (TableCell cell in column) { cell.Enabled = false; }
         }
+        [Obsolete("use integer rather than TableCell[] to represent Table Column")]
         public void SetHeaderForeColors(TableCell[] column, System.Drawing.Color color)
         {
             column[0].ForeColor = color;
@@ -60,10 +127,10 @@ namespace RocketryWebApp.WebForm1
             List<TextBox[]> columns = new List<TextBox[]>();
             foreach (TextBox[] column in columns)
             {
-                SlideDown(stageNumber, column);
+                SlideStagesDown(stageNumber, column);
             }
         }
-        private static void SlideDown(int stageNumber, TextBox[] column)
+        private static void SlideStagesDown(int stageNumber, TextBox[] column)
         {
             for (int i = stageNumber; i < 9; i++)
             {

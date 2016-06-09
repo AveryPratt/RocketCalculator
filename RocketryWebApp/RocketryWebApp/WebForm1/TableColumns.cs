@@ -5,8 +5,10 @@ using System.Web.UI.WebControls;
 
 namespace RocketryWebApp.WebForm1
 {
+    [Obsolete]
     public static class TableColumns
     {
+
         // =========== TextBox Columns ============
         public static List<TextBox[]> Columns { get; }
 
@@ -18,7 +20,7 @@ namespace RocketryWebApp.WebForm1
         public static TextBox[] MinTWRColumn { get; }
         public static TextBox[] MaxTWRColumn { get; }
 
-        public static string GetTextBoxText (int i, TextBox[] column)
+        public static string GetTextBoxText(int i, TextBox[] column)
         {
             return column[i].Text;
         }
@@ -96,6 +98,14 @@ namespace RocketryWebApp.WebForm1
 
         public static void SetTCColumns(Table RocketTable)
         {
+            TCWetMassColumn = new TableCell[11];
+            TCDryMassColumn = new TableCell[11];
+            TCIspColumn = new TableCell[11];
+            TCDeltaVColumn = new TableCell[11];
+            TCThrustColumn = new TableCell[11];
+            TCMinTWRColumn = new TableCell[11];
+            TCMaxTWRColumn = new TableCell[11];
+
             foreach (TableRow row in RocketTable.Rows)
             {
                 foreach (TableCell cell in row.Cells)
@@ -136,6 +146,7 @@ namespace RocketryWebApp.WebForm1
         }
         private static void SetTCColumnList()
         {
+            TCColumns = new List<TableCell[]>();
             TCColumns.Clear();
 
             TCColumns.Add(TCWetMassColumn);
