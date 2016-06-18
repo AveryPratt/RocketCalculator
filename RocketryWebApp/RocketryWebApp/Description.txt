@@ -1,0 +1,2 @@
+Welcome to <ins>Jebediah's Insurance Policy</ins>! <em>*ahem*</em> <ins>Rocket Calculator</ins>!<br/>
+This site is a tool for measuring the capabilities of specific rocket designs. Whether you are here because you need help building a space-worthy design in Kerbal Space Program, or because you are Elon Musk seeking to invite a lowly developer on a Charlie-and-the-Chocolate-Factory-esque tour of SpaceX (one can only hope!), Rocketry Web App will provide beneficial information that will help you optimize your design.
