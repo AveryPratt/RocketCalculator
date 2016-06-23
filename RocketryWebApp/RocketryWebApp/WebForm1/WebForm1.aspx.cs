@@ -1,129 +1,150 @@
 ﻿using KSP_Library;
+using KSP_Library.Rocketry;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.IO;
 
 namespace RocketryWebApp.WebForm1
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        int StageNumber;
-        bool ShowStages;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                setStageNumber(0);
+            }
+            else
+            {
+                getStageNumber();
+            }
+            SaveButton.Visible = false;
+            int.TryParse(StageNumberTextBox.Text, out StageNumber);
+            ErrorMessage.Visible = false;
+            StreamReader descRdr = new StreamReader(@"C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\Description.txt");
+            Description.InnerHtml = descRdr.ReadToEnd();
+            descRdr.Close();
+            StreamReader instRdr = new StreamReader(@"C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\Instructions.txt");
+            Instructions.InnerHtml =instRdr.ReadToEnd();
+            instRdr.Close();
         }
-        
-        protected void SetStagesButton_Clicked(object sender, EventArgs e)
-        {
 
+        #region CheckBoxes
+        protected void DeltaVCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            IspCheckBox.Checked = false;
+            setTable();
+        }
+        protected void IspCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            DeltaVCheckBox.Checked = false;
+            setTable();
+        }
+        protected void ThrustCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            TWRCheckBox.Checked = false;
+            thrustTWRCalculationSettings();
+            setTable();
+        }
+        protected void TWRCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            ThrustCheckBox.Checked = false;
+            thrustTWRCalculationSettings();
+            setTable();
+        }
+        protected void MinCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            setTable();
+        }
+        protected void MaxCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            setTable();
+        }
+        private void thrustTWRCalculationSettings()
+        {
+            if (TWRCheckBox.Checked || ThrustCheckBox.Checked)
+            {
+                ParentBodyDropDownList.Enabled = true;
+                MinTWRCheckBox.Enabled = true;
+                MaxTWRCheckBox.Enabled = true;
+            }
+            else
+            {
+                ParentBodyDropDownList.Enabled = false;
+                MinTWRCheckBox.Enabled = false;
+                MaxTWRCheckBox.Enabled = false;
+            }
+        }
+        #endregion
+
+        protected void CreateRocketButton_Clicked(object sender, EventArgs e)
+        {
+            TableDiv.Visible = true;
+            setTable();
         }
 
         protected void AddStageButton_Clicked(object sender, EventArgs e)
         {
-            ShowStages = true;
-            ViewState["ShowStages"] = ShowStages;
-            StageNumber++;
-            StageNumberTextBox.Text = StageNumber.ToString();
+            raiseStageNumber();
+            setTable();
         }
 
-        // Delete Stage Buttons
+        #region DeleteButtons
         protected void Button1_Clicked(object sender, EventArgs e)
         {
-            ResetStage(1);
-            StageNumber--;
-            StageNumberTextBox.Text = StageNumber.ToString();
+            deleteButtonHandler(1);
         }
         protected void Button2_Clicked(object sender, EventArgs e)
         {
-            ResetStage(2);
-            StageNumber--;
-            StageNumberTextBox.Text = StageNumber.ToString();
+            deleteButtonHandler(2);
         }
         protected void Button3_Clicked(object sender, EventArgs e)
         {
-            ResetStage(3);
-            StageNumber--;
-            StageNumberTextBox.Text = StageNumber.ToString();
+            deleteButtonHandler(3);
         }
         protected void Button4_Clicked(object sender, EventArgs e)
         {
-            ResetStage(4);
-            StageNumber--;
-            StageNumberTextBox.Text = StageNumber.ToString();
+            deleteButtonHandler(4);
         }
         protected void Button5_Clicked(object sender, EventArgs e)
         {
-            ResetStage(5);
-            StageNumber--;
-            StageNumberTextBox.Text = StageNumber.ToString();
+            deleteButtonHandler(5);
         }
         protected void Button6_Clicked(object sender, EventArgs e)
         {
-            ResetStage(6);
-            StageNumber--;
-            StageNumberTextBox.Text = StageNumber.ToString();
+            deleteButtonHandler(6);
         }
         protected void Button7_Clicked(object sender, EventArgs e)
         {
-            ResetStage(7);
-            StageNumber--;
-            StageNumberTextBox.Text = StageNumber.ToString();
+            deleteButtonHandler(7);
         }
         protected void Button8_Clicked(object sender, EventArgs e)
         {
-            ResetStage(8);
-            StageNumber--;
-            StageNumberTextBox.Text = StageNumber.ToString();
+            deleteButtonHandler(8);
         }
         protected void Button9_Clicked(object sender, EventArgs e)
         {
-            ResetStage(9);
-            StageNumber--;
-            StageNumberTextBox.Text = StageNumber.ToString();
+            deleteButtonHandler(9);
         }
+        private void deleteButtonHandler(int stageDeleted)
+        {
+            cascadeAboveRows(stageDeleted);
+            setTable();
+        }
+        #endregion
 
         protected void CalculateButton_Clicked(object sender, EventArgs e)
         {
-            // creates celestial body from ParentBodyDropDownList for TWR and Thrust calculations
-            Body myBody;
-            myBody = KerbolSystem.GetSystemBody(ParentBodyDropDownList.SelectedItem.Text);
+            setTable();
+            runCalculations();
+        }
 
-            //setTable();
-            // gets a list of Stages by invocing helper method
-            List<Stage> stageList = getStages();
-
-            bool DeltaVCalculated = true;
-            bool IspCalculated = true;
-            bool ThrustCalculated = true;
-            bool MinTWRCalculated = true;
-            bool MaxTWRCalculated = true;
-
-            // foreach loop below increments by i
-            int i = 0;
-            // calculates and sets values in TextBoxes according to which CheckBoxes are checked:
-            foreach (Stage stage in stageList)
-            {
-                bool deltaVCalculated = true;
-                bool ispCalculated = true;
-                bool thrustCalculated = true;
-                bool minTWRCalculated = true;
-                bool maxTWRCalculated = true;
-                if (DeltaVCheckBox.Checked) { DeltaVCalculation(stage, i, out deltaVCalculated); }
-                if (IspCheckBox.Checked) { IspCalculation(stage, i, out ispCalculated); }
-                if (ThrustCheckBox.Checked) { ThrustCalculation(stage, myBody, i, out thrustCalculated); }
-                if (TWRCheckBox.Checked) { TWRCalculation(stage, myBody, i, out minTWRCalculated, out maxTWRCalculated); }
-
-                if (deltaVCalculated == false) { DeltaVCalculated = false; }
-                if (ispCalculated == false) { IspCalculated = false; }
-                if (thrustCalculated == false) { ThrustCalculated = false; }
-                if (minTWRCalculated == false) { MinTWRCalculated = false; }
-                if (maxTWRCalculated == false) { MaxTWRCalculated = false; }
-                i++;
-            }
-            SetHeaderColors(DeltaVCalculated, IspCalculated, ThrustCalculated, MinTWRCalculated, MaxTWRCalculated);
+        protected void SaveRocketButton_Clicked(object sender, EventArgs e)
+        {
+            setTable();
         }
     }
 }
