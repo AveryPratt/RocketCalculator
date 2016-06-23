@@ -22,13 +22,13 @@ namespace RocketryWebApp.WebForm1 {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// StageNumberTextBox control.
+        /// Description control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox StageNumberTextBox;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Description;
         
         /// <summary>
         /// DeltaVCheckBox control.
@@ -94,13 +94,49 @@ namespace RocketryWebApp.WebForm1 {
         protected global::System.Web.UI.WebControls.CheckBox MaxTWRCheckBox;
         
         /// <summary>
-        /// SetStagesButton control.
+        /// RocketNameTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SetStagesButton;
+        protected global::System.Web.UI.WebControls.TextBox RocketNameTextBox;
+        
+        /// <summary>
+        /// StageNumberTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox StageNumberTextBox;
+        
+        /// <summary>
+        /// CreateRocketButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CreateRocketButton;
+        
+        /// <summary>
+        /// TableDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TableDiv;
+        
+        /// <summary>
+        /// PayloadTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PayloadTextBox;
         
         /// <summary>
         /// RocketTable control.
@@ -119,6 +155,15 @@ namespace RocketryWebApp.WebForm1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableRow HeaderRow;
+        
+        /// <summary>
+        /// NameCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell NameCell;
         
         /// <summary>
         /// AddStageButton control.
@@ -1345,13 +1390,85 @@ namespace RocketryWebApp.WebForm1 {
         protected global::System.Web.UI.WebControls.Button Button9;
         
         /// <summary>
-        /// TotalRow control.
+        /// FooterRow control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableRow TotalRow;
+        protected global::System.Web.UI.WebControls.TableRow FooterRow;
+        
+        /// <summary>
+        /// FooterWetMass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell FooterWetMass;
+        
+        /// <summary>
+        /// FooterDryMass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell FooterDryMass;
+        
+        /// <summary>
+        /// FooterIsp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell FooterIsp;
+        
+        /// <summary>
+        /// FooterDeltaV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell FooterDeltaV;
+        
+        /// <summary>
+        /// FooterThrust control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell FooterThrust;
+        
+        /// <summary>
+        /// FooterMinTWR control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell FooterMinTWR;
+        
+        /// <summary>
+        /// FooterMaxTWR control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell FooterMaxTWR;
+        
+        /// <summary>
+        /// Reference control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Reference;
         
         /// <summary>
         /// CalculateButton control.
@@ -1361,5 +1478,32 @@ namespace RocketryWebApp.WebForm1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button CalculateButton;
+        
+        /// <summary>
+        /// SaveButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SaveButton;
+        
+        /// <summary>
+        /// ErrorMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ErrorMessage;
+        
+        /// <summary>
+        /// Instructions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Instructions;
     }
 }
