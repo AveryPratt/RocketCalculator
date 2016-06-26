@@ -13,13 +13,40 @@ namespace RocketryWebApp.WebForm1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+        }
+
+        protected void LoginButton_Clicked(object sender, EventArgs e)
+        {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             using (SqlConnection con = new SqlConnection(CS))
             {
-                SqlCommand cmd = new SqlCommand("Select * from tblPerson", con);
+                string checkUser = "SELECT count(*) FROM myUsers WHERE UserName='" + UserNameTextBox.Text + "'";
+                SqlCommand cmd = new SqlCommand(checkUser, con);
                 con.Open();
-                GridView1.DataSource = cmd.ExecuteReader();
-                GridView1.DataBind();
+                int temp = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                con.Close();
+                if(temp > 0)
+                {
+                    con.Open();
+                    string checkPasswordQuery = "SELECT Password FROM myUsers WHERE UserName='" + UserNameTextBox.Text + "'";
+                    SqlCommand PWcmd = new SqlCommand(checkPasswordQuery, con);
+
+                    string password = PWcmd.ExecuteScalar().ToString();
+                    if(password == PasswordTextBox.Text)
+                    {
+                        Session["New"] = UserNameTextBox.Text;
+                        Response.Write("Password is correct.");
+                    }
+                    else
+                    {
+                        Response.Write("Password is incorrect");
+                    }
+                }
+                else
+                {
+                    Response.Write("Username is incorrect.");
+                }
             }
         }
     }

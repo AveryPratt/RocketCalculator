@@ -14,9 +14,24 @@
                     <h1>Rocket Calculator</h1>
                 </header>
                 <div id="content">
-                    <asp:GridView ID="GridView1" runat="server">
-
-                    </asp:GridView>
+                    <asp:Table ID="LoginTable" runat="server">
+                        <asp:TableHeaderRow>
+                            <asp:TableHeaderCell>Login</asp:TableHeaderCell>
+                        </asp:TableHeaderRow>
+                        <asp:TableRow>
+                            <asp:TableCell>Username:</asp:TableCell>
+                            <asp:TableCell><asp:TextBox ID="UserNameTextBox" runat="server"></asp:TextBox></asp:TableCell>
+                            <asp:TableCell><asp:RequiredFieldValidator ID="UserNameRequiredFieldValidator" runat="server" ErrorMessage="Please enter Username" ControlToValidate="UserNameTextBox"></asp:RequiredFieldValidator></asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>Password:</asp:TableCell>
+                            <asp:TableCell><asp:TextBox ID="PasswordTextBox" runat="server"></asp:TextBox></asp:TableCell>
+                            <asp:TableCell><asp:RequiredFieldValidator ID="PasswordRequiredFieldValidator" runat="server" ErrorMessage="Please enter Password" ControlToValidate="PasswordTextBox" TextMode="Password"></asp:RequiredFieldValidator></asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell><asp:Button ID="LoginButton" Text="Login" runat="server" OnClick="LoginButton_Clicked"/></asp:TableCell>
+                        </asp:TableRow>
+                    </asp:Table>
                 </div>
                 <footer>
                     <p>
