@@ -14,6 +14,7 @@ C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\RocketryWebApp.dll.config
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\RocketryWebApp.dll
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\RocketryWebApp.pdb
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\KSP Library.dll
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\Microsoft.AI.Agent.Intercept.dll
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\Microsoft.AI.DependencyCollector.dll
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -22,6 +23,7 @@ C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\Microsoft.AI.WindowsServer.dll
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\Microsoft.ApplicationInsights.dll
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\KSP Library.pdb
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\Microsoft.AI.Web.xml
@@ -31,5 +33,3 @@ C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\obj\Debug\RocketryWebApp.csprojResolveAssemblyReference.cache
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\obj\Debug\RocketryWebApp.dll
 C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\obj\Debug\RocketryWebApp.pdb
-C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\KSP Library.dll
-C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\RocketryWebApp\bin\KSP Library.pdb

@@ -97,10 +97,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CreateAccount\CreateAccountWebForm.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Login\LoginWebForm.aspx" />
+    <Content Include="Calculator\CalculatorWebForm.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -112,27 +115,58 @@
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Web.config" />
-    <Content Include="WebForm1\WebForm1.aspx" />
+    <Content Include="Calculator\CalculatorStyleSheet.css" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculator\CalculatorWebForm.aspx.designer.cs">
+      <DependentUpon>CalculatorWebForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateAccount\CreateAccountWebForm.aspx.cs">
+      <DependentUpon>CreateAccountWebForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateAccount\CreateAccountWebForm.aspx.designer.cs">
+      <DependentUpon>CreateAccountWebForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\LoginWebForm.aspx.designer.cs">
+      <DependentUpon>LoginWebForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebForm1\WF1Calculations.cs">
+    <Compile Include="Calculator\ConversionErrors.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm1\WF1CheckBoxLogic.cs">
+    <Compile Include="Calculator\Conversions.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm1\WF1ErrorHandling.cs">
+    <Compile Include="Calculator\ViewStateVariables.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm1\TableColumns.cs" />
-    <Compile Include="WebForm1\TableSettings.cs" />
-    <Compile Include="WebForm1\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Calculator\SQLConnection.cs" />
+    <Compile Include="Calculator\TableColumnNameEnum.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm1\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Calculator\TableColumnSettingMethods.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calculator\Calculations.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calculator\CalculationErrors.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calculator\TableRowSettingMethods.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calculator\SetTable.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\LoginWebForm.aspx.cs">
+      <DependentUpon>LoginWebForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Calculator\CalculatorWebForm.aspx.cs">
+      <DependentUpon>CalculatorWebForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
   <PropertyGroup>
