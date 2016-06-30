@@ -31,21 +31,21 @@
                         </asp:TableHeaderRow>
                         <asp:TableRow>
                             <asp:TableCell>Username:</asp:TableCell>
-                            <asp:TableCell><asp:TextBox ID="UserNameTextBox" runat="server"></asp:TextBox></asp:TableCell>
-                            <asp:TableCell><asp:RequiredFieldValidator ID="UserNameRequiredFieldValidator" runat="server" ErrorMessage="Please enter Username" ControlToValidate="UserNameTextBox"></asp:RequiredFieldValidator></asp:TableCell>
+                            <asp:TableCell><asp:TextBox ID="CreateUserNameTextBox" runat="server"></asp:TextBox></asp:TableCell>
+                            <asp:TableCell><asp:RequiredFieldValidator ID="CreateUserNameRequiredFieldValidator" runat="server" ErrorMessage="Please enter Username" ControlToValidate="CreateUserNameTextBox"></asp:RequiredFieldValidator></asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
                             <asp:TableCell>Password:</asp:TableCell>
-                            <asp:TableCell><asp:TextBox ID="PasswordTextBox" runat="server" TextMode="Password"></asp:TextBox></asp:TableCell>
-                            <asp:TableCell><asp:RequiredFieldValidator ID="PasswordRequiredFieldValidator" runat="server" ErrorMessage="Please enter Password" ControlToValidate="PasswordTextBox" TextMode="Password"></asp:RequiredFieldValidator></asp:TableCell>
+                            <asp:TableCell><asp:TextBox ID="CreatePasswordTextBox" runat="server" TextMode="Password"></asp:TextBox></asp:TableCell>
+                            <asp:TableCell><asp:RequiredFieldValidator ID="CreatePasswordRequiredFieldValidator" runat="server" ErrorMessage="Please enter Password" ControlToValidate="CreatePasswordTextBox" TextMode="Password"></asp:RequiredFieldValidator></asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
                             <asp:TableCell>Confirm Password:</asp:TableCell>
                             <asp:TableCell><asp:TextBox ID="ConfirmPasswordTextBox" runat="server" TextMode="Password"></asp:TextBox></asp:TableCell>
-                            <asp:TableCell><asp:RequiredFieldValidator ID="ConfirmPassWord" runat="server" ErrorMessage="Please enter Password" ControlToValidate="PasswordTextBox" TextMode="Password"></asp:RequiredFieldValidator></asp:TableCell>
+                            <asp:TableCell><asp:RequiredFieldValidator ID="ConfirmPassWord" runat="server" ErrorMessage="Please enter Password" ControlToValidate="ConfirmPasswordTextBox" TextMode="Password"></asp:RequiredFieldValidator></asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
-                            <asp:TableCell><asp:Button ID="CreateAccountButton" Text="Create Account" runat="server" OnClick="CreateAccountButton_Clicked"/></asp:TableCell>
+                            <asp:TableCell><asp:Button ID="CreateAccountButton" Text="Create Account" runat="server" OnClick="CreateAccountButton_Clicked" PostBackUrl="~/Calculator/CalculatorWebForm.aspx" /></asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>
                 </div>

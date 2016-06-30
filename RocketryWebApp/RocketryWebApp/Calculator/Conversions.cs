@@ -11,6 +11,7 @@ namespace RocketryWebApp.Calculator
 {
     public partial class CalculatorWebForm
     {
+
         public static class Conversions
         {
             // Table to Rocket conversion
@@ -36,25 +37,25 @@ namespace RocketryWebApp.Calculator
                         switch (row.Cells.GetCellIndex(cell))
                         {
                             case (int)ColumnName.WetMass:
-                                stage.WetMass = ConversionErrors.DoubleConversion(getTextBoxText(cell), rowIndex, (int)InputValue.WetMass, out error);
+                                stage.WetMass = DoubleConversion(getTextBoxText(cell), rowIndex, (int)InputValue.WetMass, out error);
                                 break;
                             case (int)ColumnName.DryMass:
-                                stage.DryMass = ConversionErrors.DoubleConversion(getTextBoxText(cell), rowIndex, (int)InputValue.DryMass, out error);
+                                stage.DryMass = DoubleConversion(getTextBoxText(cell), rowIndex, (int)InputValue.DryMass, out error);
                                 break;
                             case (int)ColumnName.Isp:
-                                stage.Isp = ConversionErrors.IntConversion(getTextBoxText(cell), rowIndex, (int)InputValue.Isp, out error);
+                                stage.Isp = IntConversion(getTextBoxText(cell), rowIndex, (int)InputValue.Isp, out error);
                                 break;
                             case (int)ColumnName.DeltaV:
-                                stage.DeltaV = ConversionErrors.IntConversion(getTextBoxText(cell), rowIndex, (int)InputValue.DeltaV, out error);
+                                stage.DeltaV = IntConversion(getTextBoxText(cell), rowIndex, (int)InputValue.DeltaV, out error);
                                 break;
                             case (int)ColumnName.Thrust:
-                                stage.Thrust = ConversionErrors.DoubleConversion(getTextBoxText(cell), rowIndex, (int)InputValue.Thrust, out error);
+                                stage.Thrust = DoubleConversion(getTextBoxText(cell), rowIndex, (int)InputValue.Thrust, out error);
                                 break;
                             case (int)ColumnName.MinTWR:
-                                stage.MinTWR = ConversionErrors.DoubleConversion(getTextBoxText(cell), rowIndex, (int)InputValue.MinTWR, out error);
+                                stage.MinTWR = DoubleConversion(getTextBoxText(cell), rowIndex, (int)InputValue.MinTWR, out error);
                                 break;
                             case (int)ColumnName.MaxTWR:
-                                stage.MaxTWR = ConversionErrors.DoubleConversion(getTextBoxText(cell), rowIndex, (int)InputValue.MaxTWR, out error);
+                                stage.MaxTWR = DoubleConversion(getTextBoxText(cell), rowIndex, (int)InputValue.MaxTWR, out error);
                                 break;
                             default:
                                 break;
@@ -111,6 +112,41 @@ namespace RocketryWebApp.Calculator
                     screenedCells.Add(cell);
                 }
                 return screenedCells;
+            }
+
+            public static double ConvertPayloadToInt(string value, out string errorMessage)
+            {
+                double payloadMass;
+                bool isValueDouble = double.TryParse(value, out payloadMass);
+                if (!isValueDouble && value != string.Empty)
+                {
+                    errorMessage = "<error> Payload Mass must be an integer or decimal to be recognized. </error><br/>";
+                }
+                else errorMessage = null;
+                return payloadMass;
+            }
+
+            public static int IntConversion(string value, int rowNumber, int cellNumber, out string errorMessage)
+            {
+                int result;
+                bool isValueInt = int.TryParse(value, out result);
+                if (!isValueInt)
+                {
+                    errorMessage = "<error> Stage " + (rowNumber + 1).ToString() + "'s " + Enum.GetName(typeof(InputValue), cellNumber) + " must be an integer. </error><br/>";
+                }
+                else errorMessage = null;
+                return result;
+            }
+            public static double DoubleConversion(string value, int rowNumber, int cellNumber, out string errorMessage)
+            {
+                double result;
+                bool isValueDouble = double.TryParse(value, out result);
+                if (!isValueDouble)
+                {
+                    errorMessage = "<error> Stage " + (rowNumber + 1).ToString() + "'s " + Enum.GetName(typeof(InputValue), cellNumber) + " must be an integer or a decimal. </error><br/>";
+                }
+                else errorMessage = null;
+                return result;
             }
 
             // Rocket to Table conversion

@@ -31,40 +31,40 @@ namespace RocketryWebApp.CreateAccount {
         protected global::System.Web.UI.WebControls.Table CreateAccountTable;
         
         /// <summary>
-        /// UserNameTextBox control.
+        /// CreateUserNameTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UserNameTextBox;
+        protected global::System.Web.UI.WebControls.TextBox CreateUserNameTextBox;
         
         /// <summary>
-        /// UserNameRequiredFieldValidator control.
+        /// CreateUserNameRequiredFieldValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator UserNameRequiredFieldValidator;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator CreateUserNameRequiredFieldValidator;
         
         /// <summary>
-        /// PasswordTextBox control.
+        /// CreatePasswordTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PasswordTextBox;
+        protected global::System.Web.UI.WebControls.TextBox CreatePasswordTextBox;
         
         /// <summary>
-        /// PasswordRequiredFieldValidator control.
+        /// CreatePasswordRequiredFieldValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator PasswordRequiredFieldValidator;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator CreatePasswordRequiredFieldValidator;
         
         /// <summary>
         /// ConfirmPasswordTextBox control.

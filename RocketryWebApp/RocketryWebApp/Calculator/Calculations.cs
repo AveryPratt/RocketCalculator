@@ -236,7 +236,7 @@ namespace RocketryWebApp.Calculator
             string postCalculationErrors;
             while (true)
             {
-                double payloadMass = ConversionErrors.ConvertPayloadToInt(PayloadTextBox.Text, out payloadConversionErrors);
+                double payloadMass = Conversions.ConvertPayloadToInt(PayloadTextBox.Text, out payloadConversionErrors);
                 if (payloadConversionErrors != string.Empty)
                 {
                     errors.Append(payloadConversionErrors);

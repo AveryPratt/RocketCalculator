@@ -18,34 +18,28 @@ namespace RocketryWebApp.CreateAccount
 
         protected void CreateAccountButton_Clicked(object sender, EventArgs e)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            if (CreatePasswordTextBox.Text != ConfirmPasswordTextBox.Text)
             {
-                string createUser = "INSERT INTO myUsers (PersonID, UserName, Password) values(, " + CreateUserNameTextBox.Text + ", " + CreatePasswordTextBox.Text + ")'" + CreateUserNameTextBox.Text + "'";
-                SqlCommand createNewUser = new SqlCommand(createUser, connection);
-                connection.Open();
-                int temp = Convert.ToInt32(createNewUser.ExecuteScalar().ToString());
-                connection.Close();
-                if (temp > 0)
+                Response.Write("Passwords do not match");
+            }
+            else
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
+                    //string createUserString = "INSERT INTO Kerbals (UserName, Password) values('" + CreateUserNameTextBox.Text + "', '" + CreatePasswordTextBox.Text + "');";
+                    SqlCommand checkUserNameString = new SqlCommand("SELECT COUNT(*) FROM Kerbals WHERE UserName = '" + CreateUserNameTextBox.Text + "';", connection);
+                    SqlCommand createNewUser = new SqlCommand("INSERT INTO Kerbals (UserName, Password) values('" + CreateUserNameTextBox.Text + "', '" + CreatePasswordTextBox.Text + "');", connection);
                     connection.Open();
-                    string checkPasswordQuery = "SELECT Password FROM myUsers WHERE UserName='" + CreateUserNameTextBox.Text + "'";
-                    SqlCommand PWcmd = new SqlCommand(checkPasswordQuery, connection);
-
-                    string password = PWcmd.ExecuteScalar().ToString();
-                    if (password == CreatePasswordTextBox.Text)
+                    if ((int)checkUserNameString.ExecuteScalar() == 0)
                     {
-                        Session["New"] = CreateUserNameTextBox.Text;
-                        Response.Write("Password is correct.");
+                        createNewUser.ExecuteNonQuery();
                     }
                     else
                     {
-                        Response.Write("Password is incorrect");
+                        Response.Write("UserName already exists");
                     }
-                }
-                else
-                {
-                    Response.Write("Username is incorrect.");
+                    connection.Close();
                 }
             }
         }
