@@ -381,9 +381,7 @@ namespace RocketryWebApp.Calculator
             }
             if (ThrustCheckBox.Checked)
             {
-                KerbolSystem solarSystem = new KerbolSystem();
-                Body body = solarSystem.GetSystemBody(ParentBodyDropDownList.SelectedItem.Text);
-
+                Body body = selectBody();
                 if (MinTWRCheckBox.Checked)
                 {
                     Calculations.CalculateThrustFromMinTWR(stage, body);
@@ -395,9 +393,7 @@ namespace RocketryWebApp.Calculator
             }
             else if (TWRCheckBox.Checked)
             {
-                KerbolSystem solarSystem = new KerbolSystem();
-                Body body = solarSystem.GetSystemBody(ParentBodyDropDownList.SelectedItem.Text);
-
+                Body body = selectBody();
                 if (MinTWRCheckBox.Checked && MaxTWRCheckBox.Checked)
                 {
                     Calculations.CalculateMinTWR(stage, body);

@@ -121,6 +121,9 @@
     <Compile Include="Calculator\CalculatorWebForm.aspx.designer.cs">
       <DependentUpon>CalculatorWebForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Calculator\SolarSystemSelection.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CreateAccount\CreateAccountWebForm.aspx.cs">
       <DependentUpon>CreateAccountWebForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

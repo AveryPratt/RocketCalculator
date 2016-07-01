@@ -42,7 +42,50 @@
                             or
                             <asp:CheckBox ID="ThrustCheckBox" runat="server" Text="Thrust" AutoPostBack="True" OnCheckedChanged="ThrustCheckBox_CheckedChanged" />
                             <br />
-                            <asp:DropDownList ID="ParentBodyDropDownList" runat="server" Enabled="False" Height="16px">
+                            <asp:DropDownList ID="RssParentBodyDropDownList" runat="server" Enabled="False" Height="16px" Visible="false">
+                                <asp:ListItem Value="1" Text="Sun" />
+                                <asp:ListItem Value="2" Text="Mercury" />
+                                <asp:ListItem Value="3" Text="Venus" />
+                                <asp:ListItem Value="4" Text="Earth" Selected="True" />
+                                <asp:ListItem Value="5" Text="Moon" />
+                                <asp:ListItem Value="6" Text="Mars" />
+                                <asp:ListItem Value="7" Text="Phobos" />
+                                <asp:ListItem Value="8" Text="Deimos" />
+                                <asp:ListItem Value="9" Text="Vesta" />
+                                <asp:ListItem Value="10" Text="Ceres" />
+                                <asp:ListItem Value="11" Text="Pallas" />
+                                <asp:ListItem Value="12" Text="Interamnia" />
+                                <asp:ListItem Value="13" Text="Hygiea" />
+                                <asp:ListItem Value="14" Text="Jupiter" />
+                                <asp:ListItem Value="15" Text="Io" />
+                                <asp:ListItem Value="16" Text="Europa" />
+                                <asp:ListItem Value="17" Text="Ganymede" />
+                                <asp:ListItem Value="18" Text="Callisto" />
+                                <asp:ListItem Value="19" Text="Saturn" />
+                                <asp:ListItem Value="20" Text="Mimas" />
+                                <asp:ListItem Value="21" Text="Enceladus" />
+                                <asp:ListItem Value="22" Text="Tethys" />
+                                <asp:ListItem Value="23" Text="Dione" />
+                                <asp:ListItem Value="24" Text="Rhea" />
+                                <asp:ListItem Value="25" Text="Titan" />
+                                <asp:ListItem Value="26" Text="Iapetus" />
+                                <asp:ListItem Value="27" Text="Uranus" />
+                                <asp:ListItem Value="28" Text="Miranda" />
+                                <asp:ListItem Value="29" Text="Ariel" />
+                                <asp:ListItem Value="30" Text="Umbriel" />
+                                <asp:ListItem Value="31" Text="Titania" />
+                                <asp:ListItem Value="32" Text="Oberon" />
+                                <asp:ListItem Value="33" Text="Neptune" />
+                                <asp:ListItem Value="34" Text="Proteus" />
+                                <asp:ListItem Value="35" Text="Triton" />
+                                <asp:ListItem Value="36" Text="Nereid" />
+                                <asp:ListItem Value="37" Text="Pluto" />
+                                <asp:ListItem Value="38" Text="Charon" />
+                                <asp:ListItem Value="39" Text="Haumea" />
+                                <asp:ListItem Value="40" Text="MakeMake" />
+                                <asp:ListItem Value="40" Text="Eris" />
+                            </asp:DropDownList>
+                            <asp:DropDownList ID="KspParentBodyDropDownList" runat="server" Enabled="False" Height="16px">
                                 <asp:ListItem Value="1" Text="Kerbol" />
                                 <asp:ListItem Value="2" Text="Moho" />
                                 <asp:ListItem Value="3" Text="Eve" />
@@ -63,6 +106,8 @@
                             </asp:DropDownList>
                             <asp:CheckBox ID="MinTWRCheckBox" runat="server" Text="min" Checked="True" AutoPostBack="True" Enabled="False" OnCheckedChanged="MinCheckBox_CheckedChanged" />
                             <asp:CheckBox ID="MaxTWRCheckBox" runat="server" Text="max" Checked="True" AutoPostBack="True" Enabled="False" OnCheckedChanged="MaxCheckBox_CheckedChanged" />
+                            <br />
+                            <asp:CheckBox ID="SolarSystemSelector" runat="server" Font-Size="12px" Text="Use Real Solar System" OnCheckChanged="SolarSystemSelector_CheckedChanged" AutoPostBack="True" OnCheckedChanged="SolarSystemSelector_CheckedChanged"/>
                         </div>
                         <p>What is the name of your rocket?</p>
                         <div class="CheckBoxDiv">

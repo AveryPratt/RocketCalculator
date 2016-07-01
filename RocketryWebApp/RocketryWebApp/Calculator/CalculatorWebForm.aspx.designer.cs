@@ -67,13 +67,22 @@ namespace RocketryWebApp.Calculator {
         protected global::System.Web.UI.WebControls.CheckBox ThrustCheckBox;
         
         /// <summary>
-        /// ParentBodyDropDownList control.
+        /// RssParentBodyDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ParentBodyDropDownList;
+        protected global::System.Web.UI.WebControls.DropDownList RssParentBodyDropDownList;
+        
+        /// <summary>
+        /// KspParentBodyDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList KspParentBodyDropDownList;
         
         /// <summary>
         /// MinTWRCheckBox control.
@@ -92,6 +101,15 @@ namespace RocketryWebApp.Calculator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox MaxTWRCheckBox;
+        
+        /// <summary>
+        /// SolarSystemSelector control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox SolarSystemSelector;
         
         /// <summary>
         /// RocketNameTextBox control.
