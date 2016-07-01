@@ -67,18 +67,26 @@ namespace RocketryWebApp.Calculator
         {
             if (TWRCheckBox.Checked || ThrustCheckBox.Checked)
             {
-                ParentBodyDropDownList.Enabled = true;
+                RssParentBodyDropDownList.Enabled = true;
+                KspParentBodyDropDownList.Enabled = true;
                 MinTWRCheckBox.Enabled = true;
                 MaxTWRCheckBox.Enabled = true;
             }
             else
             {
-                ParentBodyDropDownList.Enabled = false;
+                RssParentBodyDropDownList.Enabled = false;
+                KspParentBodyDropDownList.Enabled = false;
                 MinTWRCheckBox.Enabled = false;
                 MaxTWRCheckBox.Enabled = false;
             }
         }
         #endregion
+
+        protected void SolarSystemSelector_CheckedChanged(object sender, EventArgs e)
+        {
+            parentBodyDropDownListVisibity();
+            setTable();
+        }
 
         protected void CreateRocketButton_Clicked(object sender, EventArgs e)
         {
