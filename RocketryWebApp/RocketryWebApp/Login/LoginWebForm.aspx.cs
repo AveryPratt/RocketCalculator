@@ -19,24 +19,25 @@ namespace RocketryWebApp.Login
         protected void LoginButton_Clicked(object sender, EventArgs e)
         {
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(CS))
+            using (SqlConnection connection = new SqlConnection(CS))
             {
-                string checkUser = "SELECT count(*) FROM myUsers WHERE UserName='" + LoginUserNameTextBox.Text + "'";
-                SqlCommand cmd = new SqlCommand(checkUser, con);
-                con.Open();
-                int temp = Convert.ToInt32(cmd.ExecuteScalar().ToString());
-                con.Close();
-                if(temp > 0)
+                string userName = LoginUserNameTextBox.Text.Trim();
+                string password = LoginPasswordTextBox.Text;
+                string selectUserQuery = "SELECT count(*) FROM Kerbals WHERE UserName='" + userName + "'";
+                SqlCommand selectUserCommand = new SqlCommand(selectUserQuery, connection);
+                connection.Open();
+                int userCount = Convert.ToInt32(selectUserCommand.ExecuteScalar().ToString());
+                connection.Close();
+                if(userCount > 0)
                 {
-                    con.Open();
-                    string checkPasswordQuery = "SELECT Password FROM myUsers WHERE UserName='" + LoginUserNameTextBox.Text + "'";
-                    SqlCommand PWcmd = new SqlCommand(checkPasswordQuery, con);
-
-                    string password = PWcmd.ExecuteScalar().ToString();
-                    if(password == LoginPasswordTextBox.Text)
+                    connection.Open();
+                    string checkPasswordQuery = "SELECT Password FROM Kerbals WHERE UserName='" + userName + "'";
+                    SqlCommand passwordCommand = new SqlCommand(checkPasswordQuery, connection);
+                    string userPassword = passwordCommand.ExecuteScalar().ToString().Trim();
+                    if (userPassword == password)
                     {
-                        Session["New"] = LoginUserNameTextBox.Text;
-                        Response.Write("Password is correct.");
+                        Session["UserName"] = userName;
+                        Response.Redirect("~/Calculator/CalculatorWebForm.aspx");
                     }
                     else
                     {
@@ -45,7 +46,7 @@ namespace RocketryWebApp.Login
                 }
                 else
                 {
-                    Response.Write("Username is incorrect.");
+                    Response.Write("Username not found");
                 }
             }
         }

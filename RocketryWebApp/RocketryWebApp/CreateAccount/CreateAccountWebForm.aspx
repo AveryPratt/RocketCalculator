@@ -45,7 +45,7 @@
                             <asp:TableCell><asp:RequiredFieldValidator ID="ConfirmPassWord" runat="server" ErrorMessage="Please enter Password" ControlToValidate="ConfirmPasswordTextBox" TextMode="Password"></asp:RequiredFieldValidator></asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
-                            <asp:TableCell><asp:Button ID="CreateAccountButton" Text="Create Account" runat="server" OnClick="CreateAccountButton_Clicked" PostBackUrl="~/Calculator/CalculatorWebForm.aspx" /></asp:TableCell>
+                            <asp:TableCell><asp:Button ID="CreateAccountButton" Text="Create Account" runat="server" OnClick="CreateAccountButton_Clicked" /></asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>
                 </div>

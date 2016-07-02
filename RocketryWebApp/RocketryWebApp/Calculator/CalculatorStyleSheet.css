@@ -12,11 +12,11 @@ header{
     font-family: Arial, sans-serif;
 }
 
-#HomeDiv{
+#UserNameDiv{
     position: absolute;
     left: 0px;
-    top: 60px;
-    margin-left: 50px;
+    top: 45px;
+    margin-left: 100px;
     font-family: Arial, sans-serif;
 }
 
@@ -24,16 +24,12 @@ header{
     position: absolute;
     right: 0px;
     top: 60px;
-    margin-right: 100px;
+    margin-right: 40px;
     font-family: Arial, sans-serif;
 }
 
-#CreateAccountDiv{
-    position: absolute;
-    right: 0px;
-    top: 60px;
-    margin-right: 200px;
-    font-family: Arial, sans-serif;
+.LoginLink{
+    margin-right: 10px;
 }
 
 #content{
@@ -47,6 +43,7 @@ header{
 footer{
     border-top: solid 1px;
     padding: 0px 40px;
+    height: 100px;
 }
 
 .ContentDiv{
@@ -64,6 +61,11 @@ footer{
 }
 
 #TableDiv{
+    float: right;
+}
+
+#RocketsDiv{
+    clear: right;
     float: right;
 }
 
@@ -87,6 +89,13 @@ footer{
 
 .TableDiv{
     background-color: #cc99ff;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.RocketsDiv{
+    background-color: #ffcc99;
     padding: 10px;
     margin: 5px;
     border-radius: 5px;
