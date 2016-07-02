@@ -21,6 +21,7 @@ namespace RocketryWebApp.Calculator
             {
                 getStageNumber();
             }
+            UserName.InnerHtml = (string)Session["UserName"];
             SaveButton.Visible = false;
             int.TryParse(StageNumberTextBox.Text, out StageNumber);
             ErrorMessage.Visible = false;
@@ -152,7 +153,7 @@ namespace RocketryWebApp.Calculator
 
         protected void SaveRocketButton_Clicked(object sender, EventArgs e)
         {
-            setTable();
+            saveRocket();
         }
     }
 }

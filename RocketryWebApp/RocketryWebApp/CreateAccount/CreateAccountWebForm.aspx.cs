@@ -27,13 +27,13 @@ namespace RocketryWebApp.CreateAccount
                 string connectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    //string createUserString = "INSERT INTO Kerbals (UserName, Password) values('" + CreateUserNameTextBox.Text + "', '" + CreatePasswordTextBox.Text + "');";
-                    SqlCommand checkUserNameString = new SqlCommand("SELECT COUNT(*) FROM Kerbals WHERE UserName = '" + CreateUserNameTextBox.Text + "';", connection);
-                    SqlCommand createNewUser = new SqlCommand("INSERT INTO Kerbals (UserName, Password) values('" + CreateUserNameTextBox.Text + "', '" + CreatePasswordTextBox.Text + "');", connection);
+                    SqlCommand checkUserNameString = new SqlCommand("SELECT COUNT(*) FROM Kerbals WHERE UserName = '" + CreateUserNameTextBox.Text.Trim() + "';", connection);
+                    SqlCommand createNewUser = new SqlCommand("INSERT INTO Kerbals (UserName, Password) values('" + CreateUserNameTextBox.Text.Trim() + "', '" + CreatePasswordTextBox.Text.Trim() + "');", connection);
                     connection.Open();
                     if ((int)checkUserNameString.ExecuteScalar() == 0)
                     {
                         createNewUser.ExecuteNonQuery();
+                        Response.Redirect("~/Calculator/CalculatorWebForm.aspx");
                     }
                     else
                     {

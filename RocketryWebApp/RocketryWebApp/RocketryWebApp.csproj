@@ -141,7 +141,9 @@
     <Compile Include="Calculator\ViewStateVariables.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Calculator\SQLConnection.cs" />
+    <Compile Include="Calculator\SaveRocket.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Calculator\TableColumnNameEnum.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

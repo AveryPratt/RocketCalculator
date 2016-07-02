@@ -14,14 +14,13 @@
                     <div id="HeaderDiv">
                         <h1>Rocket Calculator</h1>
                     </div>
-                    <div id="HomeDiv">
-                        <a href="../Calculator/CalculatorWebForm.aspx">Home</a>
+                    <div id="UserNameDiv">
+                        <p id="UserName" runat="server"></p>
                     </div>
-                    <div id="LoginDiv">
-                        <a href="../Login/LoginWebForm.aspx">Login</a>
-                    </div>
-                    <div id="CreateAccountDiv">
-                        <a href="../CreateAccount/CreateAccountWebForm.aspx">Create Account</a>
+                    <div id="LoginDiv" align="horizontal">
+                        <a class="LoginLink" href="../Calculator/CalculatorWebForm.aspx">Home</a>
+                        <a class="LoginLink" href="../Login/LoginWebForm.aspx">Login</a>
+                        <a class="LoginLink" href="../CreateAccount/CreateAccountWebForm.aspx">Create Account</a>
                     </div>
                 </header>
                 <div id="content">
@@ -408,9 +407,14 @@
 
                         </asp:Table>
                         <asp:Button ID="CalculateButton" CssClass="Button" runat="server" Text="Calculate" OnClick="CalculateButton_Clicked" Visible="false" />
-                        <asp:Button ID="SaveButton" CssClass="Button" runat="server" Text="Save Rocket" OnClick="CalculateButton_Clicked" visible="false" />
+                        <asp:Button ID="SaveButton" CssClass="Button" runat="server" Text="Save Rocket" OnClick="SaveRocketButton_Clicked" visible="false" />
                         <div align="center">
                             <p id="ErrorMessage" runat="server"></p>
+                        </div>
+                    </div>
+                    <div id="RocketsDiv" class="ContentDiv" visible="false">
+                        <div class="RocketsDiv">
+                            MyRocket
                         </div>
                     </div>
                     <div id="InstructionsDiv" class="ContentDiv">

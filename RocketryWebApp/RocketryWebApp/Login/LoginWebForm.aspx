@@ -40,7 +40,7 @@
                             <asp:TableCell><asp:RequiredFieldValidator ID="LoginPasswordRequiredFieldValidator" runat="server" ErrorMessage="Please enter Password" ControlToValidate="LoginPasswordTextBox" TextMode="Password"></asp:RequiredFieldValidator></asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
-                            <asp:TableCell><asp:Button ID="LoginButton" Text="Login" runat="server" OnClick="LoginButton_Clicked" PostBackUrl="~/Calculator/CalculatorWebForm.aspx" /></asp:TableCell>
+                            <asp:TableCell><asp:Button ID="LoginButton" Text="Login" runat="server" OnClick="LoginButton_Clicked" /></asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>
                 </div>
