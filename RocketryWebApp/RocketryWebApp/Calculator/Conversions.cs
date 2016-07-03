@@ -16,20 +16,64 @@ namespace RocketryWebApp.Calculator
         {
             // Table to Rocket conversion
             public delegate string GetTextBoxTextDelegate(TableCell cell);
-            public static List<Stage> ConvertTableToStageList(Table rocketTable, GetTextBoxTextDelegate getTextBoxText, out string conversionErrorsAdded)
-            {
-                List<Stage> stageList = setStageList(rocketTable, getTextBoxText, out conversionErrorsAdded);
-                return stageList;
-            }
-            private static List<Stage> setStageList(Table rocketTable, GetTextBoxTextDelegate getTextBoxText, out string errorMessageAdded)
+
+            public static List<Stage> ConvertWholeTableToStageList(Table rocketTable, GetTextBoxTextDelegate getTextBoxText)
             {
                 List<Stage> stageList = new List<Stage>();
-                StringBuilder errorMessage = new StringBuilder();
+
                 List<TableRow> rowList = screenRows(rocketTable);
                 foreach (TableRow row in rowList)
                 {
                     int rowIndex = rowList.FindIndex(r => r == row);
                     Stage stage = new Stage(rocketTable.Rows.GetRowIndex(row) - 1);
+
+                    List<TableCell> cellList = screenVisibleCells(row);
+                    foreach (TableCell cell in cellList)
+                    {
+                        string error = string.Empty;
+                        switch (row.Cells.GetCellIndex(cell))
+                        {
+                            case (int)ColumnName.WetMass:
+                                stage.WetMass = double.Parse(getTextBoxText(cell));
+                                break;
+                            case (int)ColumnName.DryMass:
+                                stage.DryMass = double.Parse(getTextBoxText(cell));
+                                break;
+                            case (int)ColumnName.Isp:
+                                stage.Isp = int.Parse(getTextBoxText(cell));
+                                break;
+                            case (int)ColumnName.DeltaV:
+                                stage.DeltaV = int.Parse(getTextBoxText(cell));
+                                break;
+                            case (int)ColumnName.Thrust:
+                                stage.Thrust = double.Parse(getTextBoxText(cell));
+                                break;
+                            case (int)ColumnName.MinTWR:
+                                stage.MinTWR = double.Parse(getTextBoxText(cell));
+                                break;
+                            case (int)ColumnName.MaxTWR:
+                                stage.MaxTWR = double.Parse(getTextBoxText(cell));
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    stageList.Add(stage);
+                }
+                return stageList;
+            }
+
+            public static List<Stage> ConvertScreenedTableToStageList(Table rocketTable, GetTextBoxTextDelegate getTextBoxText, out string conversionErrorsAdded)
+            {
+                List<Stage> stageList = new List<Stage>();
+                StringBuilder errorMessage = new StringBuilder();
+
+                List<TableRow> rowList = screenRows(rocketTable);
+                foreach (TableRow row in rowList)
+                {
+                    int rowIndex = rowList.FindIndex(r => r == row);
+                    Stage stage = new Stage(rocketTable.Rows.GetRowIndex(row) - 1);
+
                     List<TableCell> cellList = screenEnabledCells(row);
                     foreach (TableCell cell in cellList)
                     {
@@ -64,7 +108,7 @@ namespace RocketryWebApp.Calculator
                     }
                     stageList.Add(stage);
                 }
-                errorMessageAdded = errorMessage.ToString();
+                conversionErrorsAdded = errorMessage.ToString();
                 return stageList;
             }
             private static List<TableRow> screenRows(Table rocketTable)

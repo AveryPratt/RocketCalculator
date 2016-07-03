@@ -18,22 +18,19 @@ namespace RocketryWebApp.Login
 
         protected void LoginButton_Clicked(object sender, EventArgs e)
         {
+            string userName = LoginUserNameTextBox.Text;
+            string password = LoginPasswordTextBox.Text;
+
             string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             using (SqlConnection connection = new SqlConnection(CS))
             {
-                string userName = LoginUserNameTextBox.Text.Trim();
-                string password = LoginPasswordTextBox.Text;
-                string selectUserQuery = "SELECT count(*) FROM Kerbals WHERE UserName='" + userName + "'";
-                SqlCommand selectUserCommand = new SqlCommand(selectUserQuery, connection);
+                SqlCommand selectUserCountCommand = new SqlCommand("SELECT COUNT(*) FROM Kerbals WHERE UserName = '" + userName + "';", connection);
+                SqlCommand passwordCommand = new SqlCommand("SELECT Password FROM Kerbals WHERE UserName='" + userName + "';", connection);
                 connection.Open();
-                int userCount = Convert.ToInt32(selectUserCommand.ExecuteScalar().ToString());
-                connection.Close();
-                if(userCount > 0)
+                int userCount = Convert.ToInt32(selectUserCountCommand.ExecuteScalar());
+                if(userCount != 0)
                 {
-                    connection.Open();
-                    string checkPasswordQuery = "SELECT Password FROM Kerbals WHERE UserName='" + userName + "'";
-                    SqlCommand passwordCommand = new SqlCommand(checkPasswordQuery, connection);
-                    string userPassword = passwordCommand.ExecuteScalar().ToString().Trim();
+                    string userPassword = passwordCommand.ExecuteScalar().ToString();
                     if (userPassword == password)
                     {
                         Session["UserName"] = userName;
@@ -41,12 +38,12 @@ namespace RocketryWebApp.Login
                     }
                     else
                     {
-                        Response.Write("Password is incorrect");
+                        Response.Write("Password is incorrect.");
                     }
                 }
                 else
                 {
-                    Response.Write("Username not found");
+                    Response.Write("Username does not exist.");
                 }
             }
         }

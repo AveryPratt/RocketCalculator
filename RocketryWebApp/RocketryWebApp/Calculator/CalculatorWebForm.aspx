@@ -414,7 +414,7 @@
                     </div>
                     <div id="RocketsDiv" class="ContentDiv" visible="false">
                         <div class="RocketsDiv">
-                            MyRocket
+                            <asp:GridView ID="UserRocketsGridView" runat="server"></asp:GridView>
                         </div>
                     </div>
                     <div id="InstructionsDiv" class="ContentDiv">

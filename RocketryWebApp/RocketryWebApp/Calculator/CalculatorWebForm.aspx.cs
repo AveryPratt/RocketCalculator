@@ -22,6 +22,7 @@ namespace RocketryWebApp.Calculator
                 getStageNumber();
             }
             UserName.InnerHtml = (string)Session["UserName"];
+            UserRocketsGridView = getUserRockets();
             SaveButton.Visible = false;
             int.TryParse(StageNumberTextBox.Text, out StageNumber);
             ErrorMessage.Visible = false;

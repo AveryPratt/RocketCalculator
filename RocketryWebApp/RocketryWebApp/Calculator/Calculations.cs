@@ -241,7 +241,7 @@ namespace RocketryWebApp.Calculator
                 {
                     errors.Append(payloadConversionErrors);
                 }
-                List<Stage> stageList = Conversions.ConvertTableToStageList(RocketTable, getTextBoxText, out conversionErrors);
+                List<Stage> stageList = Conversions.ConvertScreenedTableToStageList(RocketTable, getTextBoxText, out conversionErrors);
                 if (conversionErrors != string.Empty)
                 {
                     errors.Append("<error> Input Conversion Unsuccessful. </error><br/>");
@@ -491,6 +491,7 @@ namespace RocketryWebApp.Calculator
                 lowValue.ToString() + "<br/>↕: " + 
                 averageValue.ToString();
         }
+
         private static string Truncate(string value, int maxLength)
         {
             if (string.IsNullOrEmpty(value))
