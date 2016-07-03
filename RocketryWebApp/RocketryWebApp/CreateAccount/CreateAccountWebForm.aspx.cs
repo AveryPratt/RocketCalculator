@@ -18,28 +18,43 @@ namespace RocketryWebApp.CreateAccount
 
         protected void CreateAccountButton_Clicked(object sender, EventArgs e)
         {
-            if (CreatePasswordTextBox.Text != ConfirmPasswordTextBox.Text)
+            string userName = CreateUserNameTextBox.Text;
+            string password = CreatePasswordTextBox.Text;
+
+            if (userName.Length < 3)
             {
-                Response.Write("Passwords do not match");
+                Response.Write("Name must be at least 3 characters long.");
+            }
+            else if (password.Length < 6)
+            {
+                Response.Write("Password must be at least 6 characters long.");
             }
             else
             {
-                string connectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                if (CreatePasswordTextBox.Text != ConfirmPasswordTextBox.Text)
                 {
-                    SqlCommand checkUserNameString = new SqlCommand("SELECT COUNT(*) FROM Kerbals WHERE UserName = '" + CreateUserNameTextBox.Text.Trim() + "';", connection);
-                    SqlCommand createNewUser = new SqlCommand("INSERT INTO Kerbals (UserName, Password) values('" + CreateUserNameTextBox.Text.Trim() + "', '" + CreatePasswordTextBox.Text.Trim() + "');", connection);
-                    connection.Open();
-                    if ((int)checkUserNameString.ExecuteScalar() == 0)
+                    Response.Write("Passwords do not match.");
+                }
+                else
+                {
+                    string connectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+                    using (SqlConnection connection = new SqlConnection(connectionString))
                     {
-                        createNewUser.ExecuteNonQuery();
-                        Response.Redirect("~/Calculator/CalculatorWebForm.aspx");
+                        SqlCommand selectUserCountCommand = new SqlCommand("SELECT COUNT(*) FROM Kerbals WHERE UserName = '" + userName + "';", connection);
+                        SqlCommand insertNewUserCommand = new SqlCommand("INSERT INTO Kerbals (UserName, Password) values('" + userName + "', '" + password + "');", connection);
+                        connection.Open();
+                        int userCount = Convert.ToInt32(selectUserCountCommand.ExecuteScalar());
+                        if (userCount != 0)
+                        {
+                            Response.Write("UserName already exists.");
+                        }
+                        else
+                        {
+                            insertNewUserCommand.ExecuteNonQuery();
+                            Session["UserName"] = userName;
+                            Response.Redirect("~/Calculator/CalculatorWebForm.aspx");
+                        }
                     }
-                    else
-                    {
-                        Response.Write("UserName already exists");
-                    }
-                    connection.Close();
                 }
             }
         }
