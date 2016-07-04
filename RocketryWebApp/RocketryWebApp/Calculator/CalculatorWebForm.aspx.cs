@@ -22,7 +22,7 @@ namespace RocketryWebApp.Calculator
                 getStageNumber();
             }
             UserName.InnerHtml = (string)Session["UserName"];
-            UserRocketsGridView = getUserRockets();
+            getUserRockets();
             SaveButton.Visible = false;
             int.TryParse(StageNumberTextBox.Text, out StageNumber);
             ErrorMessage.Visible = false;
@@ -154,7 +154,18 @@ namespace RocketryWebApp.Calculator
 
         protected void SaveRocketButton_Clicked(object sender, EventArgs e)
         {
-            saveRocket();
+            setTable();
+            runCalculations();
+            if (ErrorMessage.InnerHtml == "<noerror> Input Conversion Successful. </noerror><br/><noerror> Stage Calculation Successful. </noerror><br/><noerror> Totals Calculation Successful. </noerror><br/>")
+            {
+                saveRocket();
+                ErrorMessage.InnerHtml += "<noerror> Save Successful. </noerror><br/>";
+            }
+            else
+            {
+                ErrorMessage.InnerHtml += "<error> Save Unsuccessful. </error><br/>";
+            }
+            getUserRockets();
         }
     }
 }

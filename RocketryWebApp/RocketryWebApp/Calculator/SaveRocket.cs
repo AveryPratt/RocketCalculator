@@ -2,28 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Text;
 using System.Web.UI.WebControls;
 using KSP_Library.Rocketry;
+using System.Data.Common;
 
 namespace RocketryWebApp.Calculator
 {
     public partial class CalculatorWebForm
     {
-        private GridView getUserRockets()
+        private void getUserRockets()
         {
-            GridView rocketList = new GridView();
             string connectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand selectRocketsCommand = new SqlCommand("SELECT RocketName, Payload, StageNumber FROM Kerbals INNER JOIN Rockets ON Kerbals.KerbalID = Rockets.KerbalID WHERE Kerbals.UserName = '" + (string)Session["UserName"] + "'", connection);
+                SqlCommand selectRocketsCommand = new SqlCommand("SELECT RocketName, Payload, ParentBody, StageNumber FROM Kerbals INNER JOIN Rockets ON Kerbals.KerbalID = Rockets.KerbalID WHERE Kerbals.UserName = '" + 
+                    (string)Session["UserName"] + "';", 
+                    connection);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(selectRocketsCommand);
+                DataSet dataSet = new DataSet();
+                dataAdapter.Fill(dataSet);
+
                 connection.Open();
-                rocketList.DataSource = selectRocketsCommand.ExecuteReader();
-                rocketList.DataBind();
+                UserRocketsGridView.DataSource = dataSet;
+                UserRocketsGridView.DataBind();
             }
-            return rocketList;
         }
 
         private void saveRocket()
@@ -39,7 +45,9 @@ namespace RocketryWebApp.Calculator
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand selectKerbalIDCommand = new SqlCommand("SELECT (KerbalID) FROM Kerbals WHERE UserName = '" + (string)Session["UserName"] + "';", connection);
+                SqlCommand selectKerbalIDCommand = new SqlCommand("SELECT (KerbalID) FROM Kerbals WHERE UserName = '" + 
+                    (string)Session["UserName"] + "';", 
+                    connection);
                 connection.Open();
                 return Convert.ToInt32(selectKerbalIDCommand.ExecuteScalar());
             }
@@ -48,7 +56,22 @@ namespace RocketryWebApp.Calculator
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand insertRocketCommand = new SqlCommand("INSERT INTO Rockets VALUES ('" + RocketNameTextBox.Text + "', '" + PayloadTextBox.Text + "', '" + StageNumber.ToString() + "', '" + kerbalID.ToString() + "');", connection);
+                string parentBody;
+                if (RssParentBodyDropDownList.Visible)
+                {
+                    parentBody = RssParentBodyDropDownList.SelectedItem.Text;
+                }
+                else
+                {
+                    parentBody = KspParentBodyDropDownList.SelectedItem.Text;
+                }
+                SqlCommand insertRocketCommand = new SqlCommand("INSERT INTO Rockets VALUES ('" +
+                    kerbalID.ToString() + "', '" +
+                    RocketNameTextBox.Text + "', '" + 
+                    PayloadTextBox.Text + "', '" +
+                    parentBody + "', '" +
+                    StageNumber.ToString() + "');",
+                    connection);
                 connection.Open();
                 insertRocketCommand.ExecuteNonQuery();
             }
@@ -57,7 +80,9 @@ namespace RocketryWebApp.Calculator
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand selectRocketIDCommand = new SqlCommand("SELECT (RocketID) FROM Rockets WHERE RocketName = '" + RocketNameTextBox.Text + "';", connection);
+                SqlCommand selectRocketIDCommand = new SqlCommand("SELECT (RocketID) FROM Rockets WHERE RocketName = '" + 
+                    RocketNameTextBox.Text + "';", 
+                    connection);
                 connection.Open();
                 return Convert.ToInt32(selectRocketIDCommand.ExecuteScalar());
             }
