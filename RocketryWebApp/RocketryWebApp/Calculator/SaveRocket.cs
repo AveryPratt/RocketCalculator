@@ -19,7 +19,7 @@ namespace RocketryWebApp.Calculator
             string connectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand selectRocketsCommand = new SqlCommand("SELECT RocketName, Payload, ParentBody, StageNumber FROM Kerbals INNER JOIN Rockets ON Kerbals.KerbalID = Rockets.KerbalID WHERE Kerbals.UserName = '" + 
+                SqlCommand selectRocketsCommand = new SqlCommand("SELECT RocketID, RocketName, Payload, ParentBody, StageNumber FROM Kerbals INNER JOIN Rockets ON Kerbals.KerbalID = Rockets.KerbalID WHERE Kerbals.UserName = '" + 
                     (string)Session["UserName"] + "';", 
                     connection);
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(selectRocketsCommand);
@@ -80,9 +80,11 @@ namespace RocketryWebApp.Calculator
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand selectRocketIDCommand = new SqlCommand("SELECT (RocketID) FROM Rockets WHERE RocketName = '" + 
-                    RocketNameTextBox.Text + "';", 
+                SqlCommand selectRocketIDCommand = new SqlCommand("SELECT IDENT_CURRENT('Rockets');",
                     connection);
+                //SqlCommand selectRocketIDCommand = new SqlCommand("SELECT (RocketID) FROM Rockets WHERE RocketName = '" +
+                //    rocketName + "';",
+                //    connection);
                 connection.Open();
                 return Convert.ToInt32(selectRocketIDCommand.ExecuteScalar());
             }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.IO;
+using System.Configuration;
 
 namespace RocketryWebApp.Calculator
 {
@@ -25,12 +26,22 @@ namespace RocketryWebApp.Calculator
 
         protected void UserRocketsGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            Response.Write("Delete");
+            string connectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand deleteRocketCommand = new SqlCommand("DELETE FROM Rockets WHERE KerbalID = " + 
+                    selectKerbalID(connectionString).ToString() + " AND RocketID = " +
+                    e.Values[0] + ";",
+                    connection);
+                connection.Open();
+                deleteRocketCommand.ExecuteNonQuery();
+            }
+            getUserRockets();
         }
 
         protected void UserRocketsGridView_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            Response.Write("Edit");
+
         }
     }
 }
