@@ -414,15 +414,10 @@
                     </div>
                     <div id="RocketsDiv" class="ContentDiv" visible="false">
                         <div class="RocketsDiv">
-                            <asp:GridView ID="UserRocketsGridView" runat="server" DataKeyNames="RocketID" OnRowDeleting="UserRocketsGridView_RowDeleting" OnRowEditing="UserRocketsGridView_RowEditing">
+                            <asp:GridView ID="UserRocketsGridView" runat="server" OnRowDeleting="UserRocketsGridView_RowDeleting" OnRowEditing="UserRocketsGridView_RowEditing">
                                 <Columns>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <asp:Button ID="EditRocketButton" runat="server" Text="Edit" CausesValidation="false" CommandName="EditRocket" CommandArgument='<%# Container.DataItemIndex %>' />
-                                            <asp:Button ID="DeleteRocketButton" runat="server" Text="Delete" CausesValidation="false" CommandName="DeleteRocket" CommandArgument='<%# Container.DataItemIndex %>' />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:ButtonField ButtonType="Button" Text="Delete" CommandName="DeleteRocket" />
+                                    <asp:CommandField ShowEditButton="true" />
+                                    <asp:CommandField ShowDeleteButton="true" />
                                 </Columns>
                             </asp:GridView>
                         </div>
