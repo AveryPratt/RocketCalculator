@@ -7,25 +7,23 @@ header{
     border-bottom: solid 1px;
 }
 
-#HeaderDiv{
-    padding-left: 100px;
-    font-family: Arial, sans-serif;
-}
-
-#UserNameDiv{
-    position: absolute;
-    left: 0px;
-    top: 45px;
+#TitleDiv{
     margin-left: 100px;
     font-family: Arial, sans-serif;
 }
 
-#LoginDiv{
+#UserName{
+    float: left;
+    margin-right: 10px;
+}
+
+.HeaderDiv{
     position: absolute;
     right: 0px;
     top: 60px;
     margin-right: 40px;
     font-family: Arial, sans-serif;
+    padding-left: 100px;
 }
 
 .LoginLink{
@@ -94,11 +92,9 @@ footer{
     border-radius: 5px;
 }
 
-.RocketsDiv{
+#UserRocketsGridView{
     background-color: #ffcc99;
-    padding: 10px;
     margin: 5px;
-    border-radius: 5px;
 }
 
 .InstructionsDiv{

@@ -30,6 +30,7 @@ namespace RocketryWebApp.Calculator
                 UserRocketsGridView.DataSource = dataSet;
                 UserRocketsGridView.DataBind();
             }
+            setUserRocketVisibility();
         }
 
         private void saveRocket()
@@ -82,9 +83,6 @@ namespace RocketryWebApp.Calculator
             {
                 SqlCommand selectRocketIDCommand = new SqlCommand("SELECT IDENT_CURRENT('Rockets');",
                     connection);
-                //SqlCommand selectRocketIDCommand = new SqlCommand("SELECT (RocketID) FROM Rockets WHERE RocketName = '" +
-                //    rocketName + "';",
-                //    connection);
                 connection.Open();
                 return Convert.ToInt32(selectRocketIDCommand.ExecuteScalar());
             }

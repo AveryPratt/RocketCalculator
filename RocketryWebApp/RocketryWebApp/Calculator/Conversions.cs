@@ -21,7 +21,7 @@ namespace RocketryWebApp.Calculator
             {
                 List<Stage> stageList = new List<Stage>();
 
-                List<TableRow> rowList = screenRows(rocketTable);
+                List<TableRow> rowList = screenVisibleRows(rocketTable);
                 foreach (TableRow row in rowList)
                 {
                     int rowIndex = rowList.FindIndex(r => r == row);
@@ -68,7 +68,7 @@ namespace RocketryWebApp.Calculator
                 List<Stage> stageList = new List<Stage>();
                 StringBuilder errorMessage = new StringBuilder();
 
-                List<TableRow> rowList = screenRows(rocketTable);
+                List<TableRow> rowList = screenVisibleRows(rocketTable);
                 foreach (TableRow row in rowList)
                 {
                     int rowIndex = rowList.FindIndex(r => r == row);
@@ -111,7 +111,7 @@ namespace RocketryWebApp.Calculator
                 conversionErrorsAdded = errorMessage.ToString();
                 return stageList;
             }
-            private static List<TableRow> screenRows(Table rocketTable)
+            private static List<TableRow> screenVisibleRows(Table rocketTable)
             {
                 List<TableRow> screenedRows = new List<TableRow>();
                 foreach (TableRow row in rocketTable.Rows)
@@ -119,6 +119,20 @@ namespace RocketryWebApp.Calculator
                     if (row.Visible == false || 
                         rocketTable.Rows.GetRowIndex(row) == 0 || 
                         rocketTable.Rows.GetRowIndex(row) == 10)
+                    {
+                        continue;
+                    }
+                    screenedRows.Add(row);
+                }
+                return screenedRows;
+            }
+            private static List<TableRow> screenRows(Table rocketTable, int stageNumber)
+            {
+                List<TableRow> screenedRows = new List<TableRow>();
+                foreach (TableRow row in rocketTable.Rows)
+                {
+                    if (rocketTable.Rows.GetRowIndex(row) == 0 ||
+                        rocketTable.Rows.GetRowIndex(row) > stageNumber)
                     {
                         continue;
                     }
@@ -149,6 +163,20 @@ namespace RocketryWebApp.Calculator
                 {
                     if (cell.Visible == false ||
                         row.Cells.GetCellIndex(cell) == 0 ||
+                        row.Cells.GetCellIndex(cell) == 8)
+                    {
+                        continue;
+                    }
+                    screenedCells.Add(cell);
+                }
+                return screenedCells;
+            }
+            private static List<TableCell> screenAllCells(TableRow row)
+            {
+                List<TableCell> screenedCells = new List<TableCell>();
+                foreach (TableCell cell in row.Cells)
+                {
+                    if (row.Cells.GetCellIndex(cell) == 0 ||
                         row.Cells.GetCellIndex(cell) == 8)
                     {
                         continue;
@@ -195,20 +223,62 @@ namespace RocketryWebApp.Calculator
 
             // Rocket to Table conversion
             public delegate void SetTextBoxTextDelegate(TableCell cell, string text);
-            public static void ConvertStageListToTable(List<Stage> stageList, double payloadMass, Table rocketTable, SetTextBoxTextDelegate setTextBoxText)
+            public static void ConvertStageListToScreenedTable(List<Stage> stageList, double payloadMass, Table rocketTable, SetTextBoxTextDelegate setTextBoxText)
             {
-                foreach (TableRow row in screenRows(rocketTable))
+                foreach (TableRow row in screenVisibleRows(rocketTable))
                 {
                     int rowIndex = rocketTable.Rows.GetRowIndex(row) - 1;
-                    convertStageToRow(stageList.Find(s => s.ID == rowIndex), payloadMass, row, setTextBoxText);
+                    convertStageToVisibleRow(stageList.Find(s => s.ID == rowIndex), payloadMass, row, setTextBoxText);
+                }
+            }
+            public static void ConvertStageListToWholeTable(List<Stage> stageList, double payloadMass, Table rocketTable, SetTextBoxTextDelegate setTextBoxText)
+            {
+                foreach (TableRow row in screenRows(rocketTable, stageList.Count))
+                {
+                    int rowIndex = rocketTable.Rows.GetRowIndex(row) - 1;
+                    convertStageToWholeRow(stageList.Find(s => s.ID == rowIndex), payloadMass, row, setTextBoxText);
                 }
             }
 
-            private static void convertStageToRow(Stage stage, double payloadMass, TableRow row, SetTextBoxTextDelegate setTextBoxText)
+            private static void convertStageToVisibleRow(Stage stage, double payloadMass, TableRow row, SetTextBoxTextDelegate setTextBoxText)
             {
                 stage.WetMass -= payloadMass;
                 stage.DryMass -= payloadMass;
                 foreach (TableCell cell in screenVisibleCells(row))
+                {
+                    switch (row.Cells.GetCellIndex(cell))
+                    {
+                        case (int)ColumnName.WetMass:
+                            setTextBoxText(cell, stage.WetMass.ToString());
+                            continue;
+                        case (int)ColumnName.DryMass:
+                            setTextBoxText(cell, stage.DryMass.ToString());
+                            continue;
+                        case (int)ColumnName.Isp:
+                            setTextBoxText(cell, stage.Isp.ToString());
+                            continue;
+                        case (int)ColumnName.DeltaV:
+                            setTextBoxText(cell, stage.DeltaV.ToString());
+                            continue;
+                        case (int)ColumnName.Thrust:
+                            setTextBoxText(cell, stage.Thrust.ToString());
+                            continue;
+                        case (int)ColumnName.MinTWR:
+                            setTextBoxText(cell, stage.MinTWR.ToString());
+                            continue;
+                        case (int)ColumnName.MaxTWR:
+                            setTextBoxText(cell, stage.MaxTWR.ToString());
+                            continue;
+                        default:
+                            continue;
+                    }
+                }
+            }
+            private static void convertStageToWholeRow(Stage stage, double payloadMass, TableRow row, SetTextBoxTextDelegate setTextBoxText)
+            {
+                //stage.WetMass -= payloadMass;
+                //stage.DryMass -= payloadMass;
+                foreach (TableCell cell in screenAllCells(row))
                 {
                     switch (row.Cells.GetCellIndex(cell))
                     {

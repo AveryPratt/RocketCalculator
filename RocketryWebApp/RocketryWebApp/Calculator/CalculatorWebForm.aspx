@@ -11,16 +11,16 @@
         <form id="form1" runat="server">
             <div id="wrapper">
                 <header>
-                    <div id="HeaderDiv">
+                    <div id="TitleDiv">
                         <h1>Rocket Calculator</h1>
                     </div>
-                    <div id="UserNameDiv">
-                        <p id="UserName" runat="server"></p>
+                    <div id="UserNameDiv" class="HeaderDiv" runat="server">
+                        <div class="LoginLink" id="UserName" runat="server"></div>
+                        <asp:LinkButton CssClass="LoginLink" ID="LogoutButton" runat="server" OnClick="LogoutButton_Click">Logout</asp:LinkButton>
                     </div>
-                    <div id="LoginDiv" align="horizontal">
-                        <a class="LoginLink" href="../Calculator/CalculatorWebForm.aspx">Home</a>
-                        <a class="LoginLink" href="../Login/LoginWebForm.aspx">Login</a>
-                        <a class="LoginLink" href="../CreateAccount/CreateAccountWebForm.aspx">Create Account</a>
+                    <div id="LoginDiv" class="HeaderDiv" runat="server">
+                        <asp:LinkButton CssClass="LoginLink" ID="LoginButton" runat="server" OnClick="LoginButton_Click">Login</asp:LinkButton>
+                        <asp:LinkButton CssClass="LoginLink" ID="CreateAccountButton" runat="server" OnClick="CreateAccountButton_Click">Create Account</asp:LinkButton>
                     </div>
                 </header>
                 <div id="content">
@@ -141,7 +141,7 @@
                                 </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow runat="server">
-                                <asp:TableCell runat="server">Stage 1:</asp:TableCell>
+                                <asp:TableCell runat="server">Stage 1: (upper)</asp:TableCell>
                                 <asp:TableCell ID="tc1" runat="server">
                                     <asp:TextBox Width="100" ID="TextBox1" runat="server"></asp:TextBox>
                                 </asp:TableCell>
@@ -412,15 +412,13 @@
                             <p id="ErrorMessage" runat="server"></p>
                         </div>
                     </div>
-                    <div id="RocketsDiv" class="ContentDiv" visible="false">
-                        <div class="RocketsDiv">
-                            <asp:GridView ID="UserRocketsGridView" runat="server" OnRowDeleting="UserRocketsGridView_RowDeleting" OnRowEditing="UserRocketsGridView_RowEditing">
-                                <Columns>
-                                    <asp:CommandField ShowEditButton="true" />
-                                    <asp:CommandField ShowDeleteButton="true" />
-                                </Columns>
-                            </asp:GridView>
-                        </div>
+                    <div id="RocketsDiv" class="ContentDiv" runat="server" visible="false">
+                        <asp:GridView ID="UserRocketsGridView" runat="server" OnRowCommand="UserRocketsGridView_RowCommand" OnRowDeleting="UserRocketsGridView_RowDeleting">
+                            <Columns>
+                                <asp:CommandField ShowSelectButton="true" />
+                                <asp:CommandField ShowDeleteButton="true" />
+                            </Columns>
+                        </asp:GridView>
                     </div>
                     <div id="InstructionsDiv" class="ContentDiv">
                         <div class="InstructionsDiv">

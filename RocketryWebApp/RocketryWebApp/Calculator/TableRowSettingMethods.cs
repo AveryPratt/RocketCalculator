@@ -52,7 +52,6 @@ namespace RocketryWebApp.Calculator
             {
                 StageNumber++;
             }
-            StageNumberTextBox.Text = StageNumber.ToString();
         }
         private void lowerStageNumber()
         {
@@ -60,7 +59,6 @@ namespace RocketryWebApp.Calculator
             {
                 StageNumber--;
             }
-            StageNumberTextBox.Text = StageNumber.ToString();
         }
 
         private void cascadeAboveRows(int stageDeleted)

@@ -97,12 +97,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CreateAccount\CreateAccountWebForm.aspx" />
+    <Content Include="CreateAccount\CreateAccount.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Login\LoginWebForm.aspx" />
+    <Content Include="Login\Login.aspx" />
     <Content Include="Calculator\CalculatorWebForm.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -124,18 +124,21 @@
     <Compile Include="Calculator\DeleteRocket.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Calculator\EditRocket.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Calculator\SolarSystemSelection.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CreateAccount\CreateAccountWebForm.aspx.cs">
-      <DependentUpon>CreateAccountWebForm.aspx</DependentUpon>
+    <Compile Include="CreateAccount\CreateAccount.aspx.cs">
+      <DependentUpon>CreateAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CreateAccount\CreateAccountWebForm.aspx.designer.cs">
-      <DependentUpon>CreateAccountWebForm.aspx</DependentUpon>
+    <Compile Include="CreateAccount\CreateAccount.aspx.designer.cs">
+      <DependentUpon>CreateAccount.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Login\LoginWebForm.aspx.designer.cs">
-      <DependentUpon>LoginWebForm.aspx</DependentUpon>
+    <Compile Include="Login\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Calculator\Conversions.cs">
@@ -165,8 +168,8 @@
     <Compile Include="Calculator\SetTable.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Login\LoginWebForm.aspx.cs">
-      <DependentUpon>LoginWebForm.aspx</DependentUpon>
+    <Compile Include="Login\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Calculator\CalculatorWebForm.aspx.cs">

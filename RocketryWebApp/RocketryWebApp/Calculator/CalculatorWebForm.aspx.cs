@@ -6,6 +6,8 @@ using System.Text;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.IO;
+using System.Web;
+using System.Web.Security;
 
 namespace RocketryWebApp.Calculator
 {
@@ -15,16 +17,18 @@ namespace RocketryWebApp.Calculator
         {
             if (!IsPostBack)
             {
-                setStageNumber(0);
+                RocketTableVisible = false;
+                StageNumber = 0;
             }
-            else
-            {
-                getStageNumber();
-            }
-            UserName.InnerHtml = (string)Session["UserName"];
+            TableDiv.Visible = RocketTableVisible;
+
+            setHeaderButtons();
+
             getUserRockets();
             SaveButton.Visible = false;
-            int.TryParse(StageNumberTextBox.Text, out StageNumber);
+            int stageNumber;
+            int.TryParse(StageNumberTextBox.Text, out stageNumber);
+            StageNumber = stageNumber;
             ErrorMessage.Visible = false;
             StreamReader descRdr = new StreamReader(@"C:\Users\Avery\Documents\Visual Studio 2015\Projects\KSP Projects\RocketryWebApp\Description.txt");
             Description.InnerHtml = descRdr.ReadToEnd();
@@ -92,7 +96,7 @@ namespace RocketryWebApp.Calculator
 
         protected void CreateRocketButton_Clicked(object sender, EventArgs e)
         {
-            TableDiv.Visible = true;
+            RocketTableVisible = true;
             setTable();
         }
 
@@ -158,14 +162,39 @@ namespace RocketryWebApp.Calculator
             runCalculations();
             if (ErrorMessage.InnerHtml == "<noerror> Input Conversion Successful. </noerror><br/><noerror> Stage Calculation Successful. </noerror><br/><noerror> Totals Calculation Successful. </noerror><br/>")
             {
-                saveRocket();
-                ErrorMessage.InnerHtml += "<noerror> Save Successful. </noerror><br/>";
+                if((string)Session["UserName"] != null)
+                {
+                    saveRocket();
+                    ErrorMessage.InnerHtml += "<noerror> Save Successful. </noerror><br/>";
+                }
+                else
+                {
+                    ErrorMessage.InnerHtml += "<error> Must be logged in to save rocket. </error><br/>";
+                }
             }
             else
             {
                 ErrorMessage.InnerHtml += "<error> Save Unsuccessful. </error><br/>";
             }
             getUserRockets();
+        }
+
+        protected void LogoutButton_Click(object sender, EventArgs e)
+        {
+            UserNameSession = null;
+            setHeaderButtons();
+            getUserRockets();
+            setTable();
+        }
+
+        protected void LoginButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Login/Login.aspx", false);
+        }
+
+        protected void CreateAccountButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/CreateAccount/CreateAccount.aspx", false);
         }
     }
 }

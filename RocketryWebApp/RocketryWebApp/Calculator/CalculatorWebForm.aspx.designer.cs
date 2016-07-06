@@ -22,6 +22,15 @@ namespace RocketryWebApp.Calculator {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// UserNameDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UserNameDiv;
+        
+        /// <summary>
         /// UserName control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,42 @@ namespace RocketryWebApp.Calculator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl UserName;
+        
+        /// <summary>
+        /// LogoutButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LogoutButton;
+        
+        /// <summary>
+        /// LoginDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LoginDiv;
+        
+        /// <summary>
+        /// LoginButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LoginButton;
+        
+        /// <summary>
+        /// CreateAccountButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton CreateAccountButton;
         
         /// <summary>
         /// Description control.
@@ -1523,6 +1568,15 @@ namespace RocketryWebApp.Calculator {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ErrorMessage;
+        
+        /// <summary>
+        /// RocketsDiv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl RocketsDiv;
         
         /// <summary>
         /// UserRocketsGridView control.

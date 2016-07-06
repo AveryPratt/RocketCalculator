@@ -12,18 +12,6 @@ namespace RocketryWebApp.Calculator
 {
     public partial class CalculatorWebForm
     {
-        //protected void UserRocketsGridView_Delete()
-        //{
-        //    int rowIndex = Convert.ToInt32(UserRocketsGridView.DataKeys[Convert.ToInt32(e.CommandArgument)].Value);
-        //    Response.Write("Delete");
-        //}
-
-        //protected void UserRocketsGridView_Edit()
-        //{
-        //    int rowIndex = Convert.ToInt32(UserRocketsGridView.DataKeys[Convert.ToInt32(e.CommandArgument)].Value);
-        //    Response.Write("Edit");
-        //}
-
         protected void UserRocketsGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
@@ -37,11 +25,6 @@ namespace RocketryWebApp.Calculator
                 deleteRocketCommand.ExecuteNonQuery();
             }
             getUserRockets();
-        }
-
-        protected void UserRocketsGridView_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-
         }
     }
 }

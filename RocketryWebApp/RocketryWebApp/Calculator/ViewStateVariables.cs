@@ -2,24 +2,83 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace RocketryWebApp.Calculator
 {
     public partial class CalculatorWebForm
     {
-        private int StageNumber;
+        public int StageNumber
+        {
+            get
+            {
+                return (int)ViewState["StageNumber"];
+            }
+            set
+            {
+                ViewState["StageNumber"] = value;
+                StageNumberTextBox.Text = value.ToString();
+            }
+        }
+        public bool RocketTableVisible {
+            get
+            {
+                return (bool)ViewState["RocketTableVisible"];
+            }
+            set
+            {
+                ViewState["RocketTableVisible"] = value;
+                TableDiv.Visible = value;
+            }
+        }
+        public bool UserRocketsVisible {
+            get
+            {
+                return (bool)ViewState["UserRocketsVisible"];
+            }
+            set
+            {
+                ViewState["UserRocketsVisible"] = value;
+                RocketsDiv.Visible = value;
+            }
+        }
+        public string UserNameSession
+        {
+            get
+            {
+                return (string)Session["UserName"];
+            }
+            set
+            {
+                Session["UserName"] = value;
+            }
+        }
 
-        private void getStageNumber()
+        private void setHeaderButtons()
         {
-            StageNumber = (int)ViewState["StageNumber"];
+            if ((string)Session["UserName"] == null)
+            {
+                UserNameDiv.Visible = false;
+                LoginDiv.Visible = true;
+            }
+            else
+            {
+                UserName.InnerHtml = (string)Session["UserName"];
+                UserNameDiv.Visible = true;
+                LoginDiv.Visible = false;
+            }
         }
-        private void setStageNumber()
+        private void setUserRocketVisibility()
         {
-            ViewState["StageNumber"] = StageNumber;
-        }
-        private void setStageNumber(int stageNumber)
-        {
-            ViewState["StageNumber"] = stageNumber;
+            if (UserRocketsGridView.Rows.Count == 0)
+            {
+                UserRocketsVisible = false;
+            }
+            else
+            {
+                UserRocketsVisible = true;
+            }
+            RocketsDiv.Visible = UserRocketsVisible;
         }
 
         private void determineCalculateButtonVisibility()

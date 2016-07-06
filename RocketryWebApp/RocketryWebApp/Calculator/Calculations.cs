@@ -256,7 +256,7 @@ namespace RocketryWebApp.Calculator
                     errors.Append(calculationErrors);
                     break;
                 }
-                Conversions.ConvertStageListToTable(stageList, payloadMass, RocketTable, setTextBoxText);
+                Conversions.ConvertStageListToScreenedTable(stageList, payloadMass, RocketTable, setTextBoxText);
                 errors.Append("<noerror> Stage Calculation Successful. </noerror><br/>");
                 calculateFooters(stageList, out postCalculationErrors);
                 if (postCalculationErrors != string.Empty)
