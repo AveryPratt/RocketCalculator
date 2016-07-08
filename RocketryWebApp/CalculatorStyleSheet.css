@@ -1,0 +1,161 @@
+﻿html, body, form, #wrapper{
+    height: 100%;
+    margin: 0;
+}
+
+header{
+    border-bottom: solid 1px;
+}
+
+#TitleDiv{
+    margin-left: 100px;
+    font-family: Arial, sans-serif;
+}
+
+#UserName{
+    float: left;
+    margin-right: 10px;
+}
+
+.HeaderDiv{
+    position: absolute;
+    right: 0px;
+    top: 60px;
+    margin-right: 40px;
+    font-family: Arial, sans-serif;
+    padding-left: 100px;
+}
+
+.AccountLink{
+    margin-right: 10px;
+}
+
+.LoginFormDiv{
+    position: absolute;
+    left: 100px;
+}
+
+#content{
+    min-height: 100%;
+    position: relative;
+    background-color: #cccccc;
+    overflow: auto;
+    padding: 20px;
+}
+
+footer{
+    border-top: solid 1px;
+    padding: 0px 40px;
+    height: 100px;
+}
+
+.ContentDiv{
+    background-color: #999999;
+    padding: 15px;
+    margin: 0px 5px 10px 5px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333333;
+}
+
+#CheckBoxDiv{
+    float: left;
+}
+
+#CalculatorDiv{
+    float: right;
+}
+
+#DefaultRocketsDiv{
+    clear: left;
+    float: left;
+}
+
+#UserRocketsDiv{
+    clear: right;
+    float: right;
+}
+
+#InstructionsDiv{
+    clear: both;
+}
+
+.DescriptionDiv{
+    background-color: #ffff99;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.CheckBoxDiv{
+    background-color: #99ffff;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.CalculatorDiv{
+    background-color: #ffcc99;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.DefaultRocketsDiv{
+    background-color: #cc99ff;
+    margin: 5px;
+}
+
+.UserRocketsDiv{
+    background-color: #ffcccc;
+    margin: 5px;
+}
+
+.hiddenColumn{
+    display: none;
+}
+
+.InstructionsDiv{
+    background-color: #99ff99;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+#RocketTable{
+    margin: 5px;
+    font-size: 12px;
+    border-radius: 0px;
+}
+
+#ErrorMessage{
+    width: 380px;
+    background-color: #ffffff;
+    border: solid;
+    border-width: 1px;
+}
+
+.Button{
+    background-color: #b3b3b3;
+    border-color: #808080;
+    padding: 10px 30px;
+    color: #333333;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+.TableCell{
+    width: 100px;
+}
+
+error{
+    color: #cc0000;
+    font: bold;
+}
+
+noerror{
+    color: #00cc00;
+    font: bold;
+}

@@ -158,12 +158,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateAccount.aspx" />
+    <Content Include="BigLogo.png" />
+    <Content Include="Logo.ico" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Login.aspx" />
-    <Content Include="default.aspx" />
+    <Content Include="HomePage.aspx" />
     <None Include="Properties\PublishProfiles\RocketCalculator.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -173,16 +175,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Instructions.txt" />
+    <None Include="Resources\Description.txt" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Calculator\CalculatorStyleSheet.css" />
+    <Content Include="CalculatorStyleSheet.css" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="default.aspx.designer.cs">
-      <DependentUpon>default.aspx</DependentUpon>
+    <Compile Include="HomePage.aspx.designer.cs">
+      <DependentUpon>HomePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Calculator\DeleteRocket.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -235,13 +239,21 @@
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="default.aspx.cs">
-      <DependentUpon>default.aspx</DependentUpon>
+    <Compile Include="HomePage.aspx.cs">
+      <DependentUpon>HomePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

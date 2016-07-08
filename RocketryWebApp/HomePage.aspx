@@ -4,14 +4,26 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head runat="server">
+        <link rel="shortcut icon" type="image/x-icon" href="Logo.ico" />
         <meta name="google-site-verification" content="JfdbGc06ArxeTwfzdFKeNVTfVYUcgkr2s_dOTsNQ0Tw" />
         <title>RocketCalculator</title>
-        <link href="Calculator/CalculatorStyleSheet.css" rel="stylesheet" type="text/css" />
+        <link href="CalculatorStyleSheet.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript">
+            function AlertLogin()
+            {
+                var userName = '<%= Session["UserName"] %>';
+                if (userName == "")
+                {
+                    alert("Before you begin building your rocket, it is recommended that you log in or create an account. This way you can save your rocket's information and reload it at a later time.")
+                }
+            }
+        </script>
     </head>
     <body>
         <form id="form1" runat="server">
             <div id="wrapper">
                 <header>
+                    <img src="BigLogo.png" style="height: 60px; left: 20px; top: 10px; position: absolute;"/>
                     <div id="TitleDiv">
                         <h1>Rocket Calculator</h1>
                     </div>
@@ -117,7 +129,7 @@
                         <div class="CheckBoxDiv">
                             <asp:TextBox ID="StageNumberTextBox" runat="server" MaxLength="1" Width="20px" />
                         </div>
-                        <asp:Button ID="CreateRocketButton" CssClass="Button" runat="server" OnClick="CreateRocketButton_Clicked" Text="Create Rocket" />
+                        <asp:Button ID="CreateRocketButton" CssClass="Button" runat="server" OnClientClick="AlertLogin();" OnClick="CreateRocketButton_Clicked" Text="Create Rocket" />
                     </div>
                     <div id="CalculatorDiv" class="ContentDiv" runat="server" visible="false">
                         <p>Payload Mass (tonnes):</p>
