@@ -4,6 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head runat="server">
+        <meta name="google-site-verification" content="JfdbGc06ArxeTwfzdFKeNVTfVYUcgkr2s_dOTsNQ0Tw" />
         <title>RocketCalculator</title>
         <link href="../Calculator/CalculatorStyleSheet.css" rel="stylesheet" type="text/css" />
     </head>
@@ -15,8 +16,8 @@
                         <h1>Rocket Calculator</h1>
                     </div>
                     <div id="LoginDiv" class="HeaderDiv" runat="server">
-                        <asp:LinkButton CssClass="LoginLink" ID="HomeButton" runat="server" OnClick="HomeButton_Click">Home</asp:LinkButton>
-                        <asp:LinkButton CssClass="LoginLink" ID="LoginButton" runat="server" OnClick="LoginButton_Click">Login</asp:LinkButton>
+                        <asp:LinkButton CssClass="AccountLink" ID="HomeButton" runat="server" OnClick="HomeButton_Click">Home</asp:LinkButton>
+                        <asp:LinkButton CssClass="AccountLink" ID="LoginButton" runat="server" OnClick="LoginButton_Click">Login</asp:LinkButton>
                     </div>
                 </header>
                 <div id="content">
@@ -50,8 +51,8 @@
                 <footer>
                     <p>
                         Created by Avery Pratt, © 2016. View my <a href="https://github.com/AveryPratt">Github</a> profile.<br />
-                        Built using Microsoft <a href="http://www.asp.net/">ASP.NET</a> and <a href="https://www.microsoft.com/en-us/download/details.aspx?id=42299">SQL Server</a>.<br />
-                        Jebediah, KSP, Kerbal Space Program, and all the celestial body names and properties belong to <a href="http://www.squad.com.mx/">Squad</a>.
+                        Built using Microsoft <a href="http://www.asp.net/">ASP.NET</a>, <a href="https://azure.microsoft.com/en-us/">Azure</a>, and <a href="https://www.microsoft.com/en-us/download/details.aspx?id=42299">SQL Server</a>.<br />
+                        Jebediah, Kerbal Space Program, and the names and properties of default rockets and celestial bodies belong to <a href="http://www.squad.com.mx/">Squad</a>.
                     </p>
                 </footer>
             </div>

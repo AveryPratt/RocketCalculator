@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="ActiveConnectionString-Web.config Connection String" description="ActiveConnectionString Connection String used in web.config by the application to access the database." defaultValue="Server=tcp:rocketcalculator.database.windows.net,1433;&#xD;&#xA;         Data Source=rocketcalculator.database.windows.net;&#xD;&#xA;         Initial Catalog=RocketryDataBase;&#xD;&#xA;         Persist Security Info=False;&#xD;&#xA;         User ID=AveryPratt;&#xD;&#xA;         Password=PYreva14;&#xD;&#xA;         MultipleActiveResultSets=False;&#xD;&#xA;         Encrypt=True;&#xD;&#xA;         TrustServerCertificate=False;&#xD;&#xA;         Connection Timeout=30;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Avery\\Documents\\Visual\ Studio\ 2015\\Projects\\KSP\ Projects\\RocketryWebApp\\RocketryWebApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ActiveConnectionString']/@connectionString" />
+  </parameter>
+  <parameter name="Local-Web.config Connection String" description="Local Connection String used in web.config by the application to access the database." defaultValue="data source=.; &#xD;&#xA;         database=RocketryWebApp; &#xD;&#xA;         integrated security=SSPI" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Avery\\Documents\\Visual\ Studio\ 2015\\Projects\\KSP\ Projects\\RocketryWebApp\\RocketryWebApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Local']/@connectionString" />
+  </parameter>
+  <parameter name="Somee-Web.config Connection String" description="Somee Connection String used in web.config by the application to access the database." defaultValue="workstation id=RocketsDataBase.mssql.somee.com;&#xD;&#xA;         packet size=4096;&#xD;&#xA;         user id=AveryPratt_SQLLogin_1;&#xD;&#xA;         pwd=nfsmnclb5m;&#xD;&#xA;         data source=RocketsDataBase.mssql.somee.com;&#xD;&#xA;         persist security info=False;&#xD;&#xA;         initial catalog=RocketsDataBase" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Avery\\Documents\\Visual\ Studio\ 2015\\Projects\\KSP\ Projects\\RocketryWebApp\\RocketryWebApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Somee']/@connectionString" />
+  </parameter>
+</parameters>
