@@ -6,7 +6,7 @@ namespace RocketryWebApp.Login
 {
     public partial class LoginWebForm : System.Web.UI.Page
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["Local"].ConnectionString;
+        string connectionString = ConfigurationManager.ConnectionStrings["ActiveConnectionString"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,8 +21,8 @@ namespace RocketryWebApp.Login
             
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand selectUserCountCommand = new SqlCommand("SELECT COUNT(*) FROM Kerbals WHERE UserName = '" + userName + "';", connection);
-                SqlCommand passwordCommand = new SqlCommand("SELECT Password FROM Kerbals WHERE UserName='" + userName + "';", connection);
+                SqlCommand selectUserCountCommand = new SqlCommand("EXECUTE spCountUserByName '" + userName + "';", connection);
+                SqlCommand passwordCommand = new SqlCommand("EXECUTE spGetPasswordFromUserName'" + userName + "';", connection);
                 connection.Open();
                 int userCount = Convert.ToInt32(selectUserCountCommand.ExecuteScalar());
                 if(userCount != 0)
@@ -31,7 +31,7 @@ namespace RocketryWebApp.Login
                     if (userPassword == password)
                     {
                         Session["UserName"] = userName;
-                        Response.Redirect("~/CalculatorWebForm/default.aspx/", false);
+                        Response.Redirect("HomePage.aspx/", false);
                     }
                     else
                     {
@@ -47,7 +47,7 @@ namespace RocketryWebApp.Login
 
         protected void HomeButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("default.aspx", false);
+            Response.Redirect("HomePage.aspx", false);
         }
 
         protected void CreateAccountButton_Click(object sender, EventArgs e)

@@ -6,7 +6,7 @@ namespace RocketryWebApp.CreateAccount
 {
     public partial class CreateAccountWebForm : System.Web.UI.Page
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["Local"].ConnectionString;
+        string connectionString = ConfigurationManager.ConnectionStrings["ActiveConnectionString"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,8 +38,8 @@ namespace RocketryWebApp.CreateAccount
                 {
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
-                        SqlCommand selectUserCountCommand = new SqlCommand("SELECT COUNT(*) FROM Kerbals WHERE UserName = '" + userName + "';", connection);
-                        SqlCommand insertNewUserCommand = new SqlCommand("INSERT INTO Kerbals (UserName, Password) values('" + userName + "', '" + password + "');", connection);
+                        SqlCommand selectUserCountCommand = new SqlCommand("EXECUTE spCountUserByName '" + userName + "';", connection);
+                        SqlCommand insertNewUserCommand = new SqlCommand("EXECUTE spCreateNewUser '" + userName + "', '" + password + "';", connection);
                         connection.Open();
                         int userCount = Convert.ToInt32(selectUserCountCommand.ExecuteScalar());
                         if (userCount != 0)
@@ -50,7 +50,7 @@ namespace RocketryWebApp.CreateAccount
                         {
                             insertNewUserCommand.ExecuteNonQuery();
                             Session["UserName"] = userName;
-                            Response.Redirect("default.aspx", false);
+                            Response.Redirect("HomePage.aspx", false);
                         }
                     }
                 }
@@ -59,7 +59,7 @@ namespace RocketryWebApp.CreateAccount
 
         protected void HomeButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("default.aspx", false);
+            Response.Redirect("HomePage.aspx", false);
         }
 
         protected void LoginButton_Click(object sender, EventArgs e)
