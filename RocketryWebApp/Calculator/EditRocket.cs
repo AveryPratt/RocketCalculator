@@ -21,7 +21,7 @@ namespace RocketryWebApp.Calculator
                 List<Stage> stageList = new List<Stage>();
                 for (int i = 0; i < stageNumber; i++)
                 {
-                    Stage stage = new Stage();
+                    Stage stage = new Stage(i);
                     stageList.Add(stage);
                 }
                 foreach (Stage stage in stageList)

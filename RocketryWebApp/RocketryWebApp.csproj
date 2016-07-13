@@ -157,9 +157,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CalculatorPic.png" />
     <Content Include="CreateAccount.aspx" />
     <Content Include="BigLogo.png" />
-    <Content Include="Logo.ico" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -177,6 +177,7 @@
   <ItemGroup>
     <None Include="Resources\Instructions.txt" />
     <None Include="Resources\Description.txt" />
+    <Content Include="RocketPic.png" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Web.config">
