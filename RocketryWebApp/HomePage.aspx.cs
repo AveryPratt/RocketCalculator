@@ -72,6 +72,7 @@ namespace RocketryWebApp.Calculator
                 KspParentBodyDropDownList.Enabled = true;
                 MinTWRCheckBox.Enabled = true;
                 MaxTWRCheckBox.Enabled = true;
+                SolarSystemSelector.Enabled = true;
             }
             else
             {
@@ -79,6 +80,7 @@ namespace RocketryWebApp.Calculator
                 KspParentBodyDropDownList.Enabled = false;
                 MinTWRCheckBox.Enabled = false;
                 MaxTWRCheckBox.Enabled = false;
+                SolarSystemSelector.Enabled = false;
             }
         }
         #endregion

@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="True" CodeBehind="HomePage.aspx.cs" Inherits="RocketryWebApp.Calculator.CalculatorWebForm" MaintainScrollPositionOnPostBack = "true" %>
+﻿<%@ Page Language="C#" AutoEventWireup="True" CodeBehind="HomePage.aspx.cs" Inherits="RocketryWebApp.Calculator.CalculatorWebForm" MaintainScrollPositionOnPostback="true" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head runat="server">
-        <link rel="shortcut icon" type="image/x-icon" href="Logo.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="CalculatorPic.png" />
         <meta name="google-site-verification" content="JfdbGc06ArxeTwfzdFKeNVTfVYUcgkr2s_dOTsNQ0Tw" />
         <title>RocketCalculator</title>
         <link href="CalculatorStyleSheet.css" rel="stylesheet" type="text/css" />
@@ -54,7 +54,7 @@
                             or
                             <asp:CheckBox ID="ThrustCheckBox" runat="server" Text="Thrust" AutoPostBack="True" OnCheckedChanged="ThrustCheckBox_CheckedChanged" />
                             <br />
-                            <asp:DropDownList ID="RssParentBodyDropDownList" runat="server" Enabled="False" Height="16px" Visible="false">
+                            <asp:DropDownList ID="RssParentBodyDropDownList" runat="server" Enabled="true" Height="16px" Visible="false">
                                 <asp:ListItem Value="1" Text="Sun" />
                                 <asp:ListItem Value="2" Text="Mercury" />
                                 <asp:ListItem Value="3" Text="Venus" />
@@ -97,7 +97,7 @@
                                 <asp:ListItem Value="40" Text="MakeMake" />
                                 <asp:ListItem Value="40" Text="Eris" />
                             </asp:DropDownList>
-                            <asp:DropDownList ID="KspParentBodyDropDownList" runat="server" Enabled="False" Height="16px">
+                            <asp:DropDownList ID="KspParentBodyDropDownList" runat="server" Enabled="true" Height="16px">
                                 <asp:ListItem Value="1" Text="Kerbol" />
                                 <asp:ListItem Value="2" Text="Moho" />
                                 <asp:ListItem Value="3" Text="Eve" />
@@ -116,10 +116,10 @@
                                 <asp:ListItem Value="16" Text="Pol" />
                                 <asp:ListItem Value="17" Text="Eeloo" />
                             </asp:DropDownList>
-                            <asp:CheckBox ID="MinTWRCheckBox" runat="server" Text="min" Checked="True" AutoPostBack="True" Enabled="False" OnCheckedChanged="MinCheckBox_CheckedChanged" />
-                            <asp:CheckBox ID="MaxTWRCheckBox" runat="server" Text="max" Checked="True" AutoPostBack="True" Enabled="False" OnCheckedChanged="MaxCheckBox_CheckedChanged" />
+                            <asp:CheckBox ID="MinTWRCheckBox" runat="server" Text="min" Checked="True" AutoPostBack="True" Enabled="true" OnCheckedChanged="MinCheckBox_CheckedChanged" />
+                            <asp:CheckBox ID="MaxTWRCheckBox" runat="server" Text="max" Checked="True" AutoPostBack="True" Enabled="true" OnCheckedChanged="MaxCheckBox_CheckedChanged" />
                             <br />
-                            <asp:CheckBox ID="SolarSystemSelector" runat="server" Font-Size="12px" Text="Use Real Solar System" OnCheckChanged="SolarSystemSelector_CheckedChanged" AutoPostBack="True" OnCheckedChanged="SolarSystemSelector_CheckedChanged"/>
+                            <asp:CheckBox ID="SolarSystemSelector" runat="server" Font-Size="12px" Text="Use Real Solar System" Enabled="true" OnCheckChanged="SolarSystemSelector_CheckedChanged" AutoPostBack="True" OnCheckedChanged="SolarSystemSelector_CheckedChanged"/>
                         </div>
                         <p>What is the name of your rocket?</p>
                         <div class="CheckBoxDiv">
