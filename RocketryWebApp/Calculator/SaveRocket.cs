@@ -107,8 +107,8 @@ namespace RocketryWebApp.Calculator
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 StringBuilder insertStages = new StringBuilder();
-                List<Stage> stageList = Conversions.ConvertWholeTableToStageList(RocketTable, getTextBoxText);
-                foreach (Stage stage in stageList)
+                Rocket rocket = Conversions.ConvertWholeTableToRocket(RocketTable, getTextBoxText);
+                foreach (Stage stage in rocket.StageList)
                 {
                     insertStages.Append("EXECUTE spAddStage " +
                         rocketID.ToString() + "," +

@@ -18,15 +18,15 @@ namespace RocketryWebApp.Calculator
                 string rocketID = ((GridView)e.CommandSource).Rows[rowIndex].Cells[1].Text;
                 GridView rocketData = getSavedValues(rocketID);
                 int stageNumber = rocketData.Rows.Count;
-                List<Stage> stageList = new List<Stage>();
+                Rocket rocket = new Rocket();
                 for (int i = 0; i < stageNumber; i++)
                 {
                     Stage stage = new Stage(i);
-                    stageList.Add(stage);
+                    rocket.StageList.Add(stage);
                 }
-                foreach (Stage stage in stageList)
+                foreach (Stage stage in rocket.StageList)
                 {
-                    stage.ID = stageList.IndexOf(stage);
+                    stage.ID = rocket.StageList.IndexOf(stage);
                     stage.WetMass = Convert.ToDouble(rocketData.Rows[stage.ID].Cells[3].Text);
                     stage.DryMass = Convert.ToDouble(rocketData.Rows[stage.ID].Cells[4].Text);
                     stage.Isp = Convert.ToInt32(rocketData.Rows[stage.ID].Cells[5].Text);
@@ -38,7 +38,7 @@ namespace RocketryWebApp.Calculator
                 double payloadMass = Convert.ToDouble(((GridView)e.CommandSource).Rows[rowIndex].Cells[3].Text);
                 PayloadTextBox.Text = payloadMass.ToString();
                 RocketNameTextBox.Text = ((GridView)e.CommandSource).Rows[rowIndex].Cells[2].Text;
-                Conversions.ConvertStageListToWholeTable(stageList, payloadMass, RocketTable, setTextBoxText);
+                Conversions.ConvertRocketToWholeTable(rocket, payloadMass, RocketTable, setTextBoxText);
                 getUserRockets();
                 RocketTableVisible = true;
                 StageNumber = Convert.ToInt32(((GridView)e.CommandSource).Rows[rowIndex].Cells[5].Text);

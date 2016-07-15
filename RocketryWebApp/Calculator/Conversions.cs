@@ -14,9 +14,9 @@ namespace RocketryWebApp.Calculator
             // Table to Rocket conversion
             public delegate string GetTextBoxTextDelegate(TableCell cell);
 
-            public static List<Stage> ConvertWholeTableToStageList(Table rocketTable, GetTextBoxTextDelegate getTextBoxText)
+            public static Rocket ConvertWholeTableToRocket(Table rocketTable, GetTextBoxTextDelegate getTextBoxText)
             {
-                List<Stage> stageList = new List<Stage>();
+                Rocket rocket = new Rocket();
 
                 List<TableRow> rowList = screenVisibleRows(rocketTable);
                 foreach (TableRow row in rowList)
@@ -55,14 +55,14 @@ namespace RocketryWebApp.Calculator
                                 break;
                         }
                     }
-                    stageList.Add(stage);
+                    rocket.StageList.Add(stage);
                 }
-                return stageList;
+                return rocket;
             }
 
-            public static List<Stage> ConvertScreenedTableToStageList(Table rocketTable, GetTextBoxTextDelegate getTextBoxText, out string conversionErrorsAdded)
+            public static Rocket ConvertScreenedTableToRocket(Table rocketTable, GetTextBoxTextDelegate getTextBoxText, out string conversionErrorsAdded)
             {
-                List<Stage> stageList = new List<Stage>();
+                Rocket rocket = new Rocket();
                 StringBuilder errorMessage = new StringBuilder();
 
                 List<TableRow> rowList = screenVisibleRows(rocketTable);
@@ -103,10 +103,10 @@ namespace RocketryWebApp.Calculator
                         }
                         errorMessage.Append(error);
                     }
-                    stageList.Add(stage);
+                    rocket.StageList.Add(stage);
                 }
                 conversionErrorsAdded = errorMessage.ToString();
-                return stageList;
+                return rocket;
             }
             private static List<TableRow> screenVisibleRows(Table rocketTable)
             {
@@ -220,20 +220,20 @@ namespace RocketryWebApp.Calculator
 
             // Rocket to Table conversion
             public delegate void SetTextBoxTextDelegate(TableCell cell, string text);
-            public static void ConvertStageListToScreenedTable(List<Stage> stageList, double payloadMass, Table rocketTable, SetTextBoxTextDelegate setTextBoxText)
+            public static void ConvertRocketToScreenedTable(Rocket rocket, double payloadMass, Table rocketTable, SetTextBoxTextDelegate setTextBoxText)
             {
                 foreach (TableRow row in screenVisibleRows(rocketTable))
                 {
                     int rowIndex = rocketTable.Rows.GetRowIndex(row) - 1;
-                    convertStageToVisibleRow(stageList.Find(s => s.ID == rowIndex), payloadMass, row, setTextBoxText);
+                    convertStageToVisibleRow(rocket.StageList.Find(s => s.ID == rowIndex), payloadMass, row, setTextBoxText);
                 }
             }
-            public static void ConvertStageListToWholeTable(List<Stage> stageList, double payloadMass, Table rocketTable, SetTextBoxTextDelegate setTextBoxText)
+            public static void ConvertRocketToWholeTable(Rocket rocket, double payloadMass, Table rocketTable, SetTextBoxTextDelegate setTextBoxText)
             {
-                foreach (TableRow row in screenRows(rocketTable, stageList.Count))
+                foreach (TableRow row in screenRows(rocketTable, rocket.StageList.Count))
                 {
                     int rowIndex = rocketTable.Rows.GetRowIndex(row) - 1;
-                    convertStageToWholeRow(stageList.Find(s => s.ID == rowIndex), payloadMass, row, setTextBoxText);
+                    convertStageToWholeRow(rocket.StageList.Find(s => s.ID == rowIndex), payloadMass, row, setTextBoxText);
                 }
             }
 
