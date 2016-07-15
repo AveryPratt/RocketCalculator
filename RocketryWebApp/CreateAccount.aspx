@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head runat="server">
-        <link rel="shortcut icon" type="image/x-icon" href="Logo.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="CalculatorPic.png" />
         <meta name="google-site-verification" content="JfdbGc06ArxeTwfzdFKeNVTfVYUcgkr2s_dOTsNQ0Tw" />
         <title>RocketCalculator</title>
         <link href="CalculatorStyleSheet.css" rel="stylesheet" type="text/css" />
