@@ -45,14 +45,34 @@
                     <div id="CheckBoxDiv" class="ContentDiv">
                         <p>Find:</p>
                         <div class="CheckBoxDiv">
-                            <asp:CheckBox ID="DeltaVCheckBox" runat="server" Text="ΔV" OnCheckedChanged="DeltaVCheckBox_CheckedChanged" AutoPostBack="True" Checked="true" />
+                            <asp:CheckBox ID="DeltaVCheckBox" 
+                                runat="server" 
+                                Text="ΔV" 
+                                OnCheckedChanged="DeltaVCheckBox_CheckedChanged" 
+                                AutoPostBack="True" 
+                                Checked="true" 
+                                Tooltip="Delta Velocity: The total amount of acceleration in m/s each stage is capable of producing." />
                             or
-                            <asp:CheckBox ID="IspCheckBox" runat="server" Text="Isp" OnCheckedChanged="IspCheckBox_CheckedChanged" AutoPostBack="True" />
+                            <asp:CheckBox ID="IspCheckBox" 
+                                runat="server" 
+                                Text="Isp" 
+                                OnCheckedChanged="IspCheckBox_CheckedChanged" 
+                                AutoPostBack="True" 
+                                Tooltip="Specific Impulse: A multiplier that determines the amount of energy imparted per unit of fuel (higher Isp = more efficient)." />
                         </div>
                         <div class="CheckBoxDiv">
-                            <asp:CheckBox ID="TWRCheckBox" runat="server" Text="TWR" AutoPostBack="True" OnCheckedChanged="TWRCheckBox_CheckedChanged" Checked="true" />
+                            <asp:CheckBox ID="TWRCheckBox" 
+                                runat="server" 
+                                Text="TWR" 
+                                AutoPostBack="True" 
+                                OnCheckedChanged="TWRCheckBox_CheckedChanged" 
+                                Checked="true" ToolTip="Thrust to Weight Ratio: This number must be higher than 1 for your rocket to be able to lift off (changes depending on which planet/moon you are on)."/>
                             or
-                            <asp:CheckBox ID="ThrustCheckBox" runat="server" Text="Thrust" AutoPostBack="True" OnCheckedChanged="ThrustCheckBox_CheckedChanged" />
+                            <asp:CheckBox ID="ThrustCheckBox" 
+                                runat="server" 
+                                Text="Thrust" 
+                                AutoPostBack="True" 
+                                OnCheckedChanged="ThrustCheckBox_CheckedChanged" ToolTip="Thrust: The sheer power of your engines. WEEEEEEEE!!!" />
                             <br />
                             <asp:DropDownList ID="RssParentBodyDropDownList" runat="server" Enabled="true" Height="16px" Visible="false">
                                 <asp:ListItem Value="1" Text="Sun" />
@@ -142,14 +162,14 @@
                         <asp:Table ID="RocketTable" CssClass="CalculatorDiv" runat="server" GridLines="Both">
                             <asp:TableRow runat="server" ID="HeaderRow">
                                 <asp:TableCell ID="NameCell" runat="server" CssClass="TableCell"><nobr>Rocket</nobr></asp:TableCell>
-                                <asp:TableCell runat="server" CssClass="TableCell"><nobr>Wet Mass (tonnes):</nobr></asp:TableCell>
-                                <asp:TableCell runat="server" CssClass="TableCell"><nobr>Dry Mass (tonnes):</nobr></asp:TableCell>
-                                <asp:TableCell runat="server" CssClass="TableCell"><nobr>Isp (seconds):</nobr></asp:TableCell>
-                                <asp:TableCell runat="server" CssClass="TableCell"><nobr>Δv (m/s):</nobr></asp:TableCell>
-                                <asp:TableCell runat="server" CssClass="TableCell"><nobr>Thrust (kN):</nobr></asp:TableCell>
-                                <asp:TableCell runat="server" CssClass="TableCell"><nobr>Min. TWR:</nobr></asp:TableCell>
-                                <asp:TableCell runat="server" CssClass="TableCell"><nobr>Max. TWR:</nobr></asp:TableCell>
-                                <asp:TableCell runat="server" CssClass="TableCell">
+                                <asp:TableCell ID="WetMassCell" runat="server" CssClass="TableCell"><nobr>Wet Mass (tonnes):</nobr></asp:TableCell>
+                                <asp:TableCell ID="DryMassCell" runat="server" CssClass="TableCell"><nobr>Dry Mass (tonnes):</nobr></asp:TableCell>
+                                <asp:TableCell ID="IspCell" runat="server" CssClass="TableCell"><nobr>Isp (seconds):</nobr></asp:TableCell>
+                                <asp:TableCell ID="DeltaVCell" runat="server" CssClass="TableCell"><nobr>Δv (m/s):</nobr></asp:TableCell>
+                                <asp:TableCell ID="ThrustCell" runat="server" CssClass="TableCell"><nobr>Thrust (kN):</nobr></asp:TableCell>
+                                <asp:TableCell ID="MinTWRCell" runat="server" CssClass="TableCell"><nobr>Min. TWR:</nobr></asp:TableCell>
+                                <asp:TableCell ID="MaxTWRCell" runat="server" CssClass="TableCell"><nobr>Max. TWR:</nobr></asp:TableCell>
+                                <asp:TableCell ID="AddDeleteStageCell" runat="server" CssClass="TableCell">
                                     <asp:Button ID="AddStageButton" runat="server" Text="Add Stage" OnClick="AddStageButton_Clicked" Width="100" />
                                 </asp:TableCell>
                             </asp:TableRow>
@@ -462,7 +482,7 @@
                     <p>
                         Created by Avery Pratt, © 2016. View my <a href="https://github.com/AveryPratt">Github</a> profile.<br />
                         Built using Microsoft <a href="http://www.asp.net/">ASP.NET</a>, <a href="https://azure.microsoft.com/en-us/">Azure</a>, and <a href="https://www.microsoft.com/en-us/download/details.aspx?id=42299">SQL Server</a>.<br />
-                        Jebediah, Kerbal Space Program, and the names and properties of default rockets and celestial bodies belong to <a href="http://www.squad.com.mx/">Squad</a>.
+                        Jebediah, Kerbal Space Program, and the names and properties of rocket templates and celestial bodies belong to <a href="http://www.squad.com.mx/">Squad</a>.
                     </p>
                 </footer>
             </div>

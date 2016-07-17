@@ -189,13 +189,13 @@
     <Compile Include="HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Calculator\DeleteRocket.cs">
+    <Compile Include="SqlAccess\DeleteRocket.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Calculator\EditRocket.cs">
+    <Compile Include="SqlAccess\EditRocket.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Calculator\SolarSystemSelection.cs">
+    <Compile Include="RocketTable\SolarSystemSelection.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CreateAccount.aspx.cs">
@@ -212,16 +212,16 @@
     <Compile Include="Calculator\Conversions.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Calculator\ViewStateVariables.cs">
+    <Compile Include="RocketTable\ViewStateVariables.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Calculator\SaveRocket.cs">
+    <Compile Include="SqlAccess\SaveRocket.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Calculator\TableColumnNameEnum.cs">
+    <Compile Include="RocketTable\TableColumnNameEnum.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Calculator\TableColumnSettingMethods.cs">
+    <Compile Include="RocketTable\TableColumnSettingMethods.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Calculator\Calculations.cs">
@@ -230,10 +230,10 @@
     <Compile Include="Calculator\CalculationErrors.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Calculator\TableRowSettingMethods.cs">
+    <Compile Include="RocketTable\TableRowSettingMethods.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Calculator\SetTable.cs">
+    <Compile Include="RocketTable\SetTable.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Login.aspx.cs">
@@ -256,6 +256,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
