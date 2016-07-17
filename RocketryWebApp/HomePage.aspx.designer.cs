@@ -238,6 +238,78 @@ namespace RocketryWebApp.Calculator {
         protected global::System.Web.UI.WebControls.TableCell NameCell;
         
         /// <summary>
+        /// WetMassCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell WetMassCell;
+        
+        /// <summary>
+        /// DryMassCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell DryMassCell;
+        
+        /// <summary>
+        /// IspCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell IspCell;
+        
+        /// <summary>
+        /// DeltaVCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell DeltaVCell;
+        
+        /// <summary>
+        /// ThrustCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell ThrustCell;
+        
+        /// <summary>
+        /// MinTWRCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell MinTWRCell;
+        
+        /// <summary>
+        /// MaxTWRCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell MaxTWRCell;
+        
+        /// <summary>
+        /// AddDeleteStageCell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell AddDeleteStageCell;
+        
+        /// <summary>
         /// AddStageButton control.
         /// </summary>
         /// <remarks>

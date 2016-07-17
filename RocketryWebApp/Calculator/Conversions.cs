@@ -14,7 +14,7 @@ namespace RocketryWebApp.Calculator
             // Table to Rocket conversion
             public delegate string GetTextBoxTextDelegate(TableCell cell);
 
-            public static Rocket ConvertWholeTableToRocket(Table rocketTable, GetTextBoxTextDelegate getTextBoxText)
+            public static Rocket ConvertTableToRocket(Table rocketTable, GetTextBoxTextDelegate getTextBoxText)
             {
                 Rocket rocket = new Rocket();
 
@@ -60,7 +60,7 @@ namespace RocketryWebApp.Calculator
                 return rocket;
             }
 
-            public static Rocket ConvertScreenedTableToRocket(Table rocketTable, GetTextBoxTextDelegate getTextBoxText, out string conversionErrorsAdded)
+            public static Rocket ConvertTableToRocket(Table rocketTable, GetTextBoxTextDelegate getTextBoxText, out string conversionErrorsAdded)
             {
                 Rocket rocket = new Rocket();
                 StringBuilder errorMessage = new StringBuilder();
@@ -189,7 +189,11 @@ namespace RocketryWebApp.Calculator
                 bool isValueDouble = double.TryParse(value, out payloadMass);
                 if (!isValueDouble && value != string.Empty)
                 {
-                    errorMessage = "<error> Payload Mass must be an integer or decimal to be recognized. </error><br/>";
+                    errorMessage = "<error> Payload mass must be an integer or decimal to be recognized. </error><br/>";
+                }
+                else if (payloadMass < 0)
+                {
+                    errorMessage = "<error> Payload mass cannot be negative. </error><br/>";
                 }
                 else errorMessage = string.Empty;
                 return payloadMass;
@@ -220,27 +224,25 @@ namespace RocketryWebApp.Calculator
 
             // Rocket to Table conversion
             public delegate void SetTextBoxTextDelegate(TableCell cell, string text);
-            public static void ConvertRocketToScreenedTable(Rocket rocket, double payloadMass, Table rocketTable, SetTextBoxTextDelegate setTextBoxText)
+            public static void ConvertRocketToScreenedTable(Rocket rocket, Table rocketTable, SetTextBoxTextDelegate setTextBoxText)
             {
                 foreach (TableRow row in screenVisibleRows(rocketTable))
                 {
                     int rowIndex = rocketTable.Rows.GetRowIndex(row) - 1;
-                    convertStageToVisibleRow(rocket.StageList.Find(s => s.ID == rowIndex), payloadMass, row, setTextBoxText);
+                    convertStageToVisibleRow(rocket.StageList.Find(s => s.ID == rowIndex), rocket.PayloadMass, row, setTextBoxText);
                 }
             }
-            public static void ConvertRocketToWholeTable(Rocket rocket, double payloadMass, Table rocketTable, SetTextBoxTextDelegate setTextBoxText)
+            public static void ConvertRocketToWholeTable(Rocket rocket, Table rocketTable, SetTextBoxTextDelegate setTextBoxText)
             {
                 foreach (TableRow row in screenRows(rocketTable, rocket.StageList.Count))
                 {
                     int rowIndex = rocketTable.Rows.GetRowIndex(row) - 1;
-                    convertStageToWholeRow(rocket.StageList.Find(s => s.ID == rowIndex), payloadMass, row, setTextBoxText);
+                    convertStageToWholeRow(rocket.StageList.Find(s => s.ID == rowIndex), rocket.PayloadMass, row, setTextBoxText);
                 }
             }
 
             private static void convertStageToVisibleRow(Stage stage, double payloadMass, TableRow row, SetTextBoxTextDelegate setTextBoxText)
             {
-                stage.WetMass -= payloadMass;
-                stage.DryMass -= payloadMass;
                 foreach (TableCell cell in screenVisibleCells(row))
                 {
                     switch (row.Cells.GetCellIndex(cell))
@@ -273,8 +275,6 @@ namespace RocketryWebApp.Calculator
             }
             private static void convertStageToWholeRow(Stage stage, double payloadMass, TableRow row, SetTextBoxTextDelegate setTextBoxText)
             {
-                //stage.WetMass -= payloadMass;
-                //stage.DryMass -= payloadMass;
                 foreach (TableCell cell in screenAllCells(row))
                 {
                     switch (row.Cells.GetCellIndex(cell))
@@ -305,6 +305,82 @@ namespace RocketryWebApp.Calculator
                     }
                 }
             }
+        }
+        private void setFooters(Rocket rocket)
+        {
+            FooterWetMass.Text = calculateRowTotals(rocket, InputValue.WetMass).ToString();
+            FooterDryMass.Text = calculateRowTotals(rocket, InputValue.DryMass).ToString();
+            FooterIsp.Text = calculateRowTotals(rocket, InputValue.Isp).ToString();
+            FooterDeltaV.Text = calculateDeltaVRowTotals(rocket).ToString();
+            FooterThrust.Text = calculateRowTotals(rocket, InputValue.Thrust).ToString();
+            FooterMinTWR.Text = calculateRowTotals(rocket, InputValue.MinTWR).ToString();
+            FooterMaxTWR.Text = calculateRowTotals(rocket, InputValue.MaxTWR).ToString();
+            Reference.Text = "↑: (stage) high<br/>↓: (stage) low<br/>↕: avg. (* # = total)";
+        }
+        private object calculateRowTotals(Rocket rocket, InputValue value)
+        {
+            object lowValue = string.Empty;
+            object highValue = string.Empty;
+            object averageValue = string.Empty;
+            object lowValueStage = string.Empty;
+            object highValueStage = string.Empty;
+            switch (value)
+            {
+                case InputValue.WetMass:
+                    averageValue = rocket.AverageWetMass().ToString();
+                    lowValueStage = rocket.LowestWetMass(out lowValue).ToString();
+                    highValueStage = rocket.HighestWetMass(out highValue).ToString();
+                    break;
+                case InputValue.DryMass:
+                    averageValue = rocket.AverageDryMass().ToString();
+                    lowValueStage = rocket.LowestDryMass(out lowValue).ToString();
+                    highValueStage = rocket.HighestDryMass(out highValue).ToString();
+                    break;
+                case InputValue.Isp:
+                    averageValue = rocket.AverageIsp().ToString();
+                    lowValueStage = rocket.LowestIsp(out lowValue).ToString();
+                    highValueStage = rocket.HighestIsp(out highValue).ToString();
+                    break;
+                case InputValue.Thrust:
+                    averageValue = rocket.AverageThrust().ToString();
+                    lowValueStage = rocket.LowestThrust(out lowValue).ToString();
+                    highValueStage = rocket.HighestThrust(out highValue).ToString();
+                    break;
+                case InputValue.MinTWR:
+                    averageValue = rocket.AverageMinTWR().ToString();
+                    lowValueStage = rocket.LowestMinTWR(out lowValue).ToString();
+                    highValueStage = rocket.HighestMinTWR(out highValue).ToString();
+                    break;
+                case InputValue.MaxTWR:
+                    averageValue = rocket.AverageMaxTWR().ToString();
+                    lowValueStage = rocket.LowestMaxTWR(out lowValue).ToString();
+                    highValueStage = rocket.HighestMaxTWR(out highValue).ToString();
+                    break;
+                default:
+                    break;
+            }
+            return "↑: (" +
+                Truncate(highValueStage.ToString(), 6) + ") " +
+                Truncate(highValue.ToString(), 6) + "<br/>↓: (" +
+                Truncate(lowValueStage.ToString(), 6) + ") " +
+                Truncate(lowValue.ToString(), 6) + "<br/>↕: " +
+                Truncate(averageValue.ToString(), 6);
+        }
+        private string calculateDeltaVRowTotals(Rocket rocket)
+        {
+            object lowValue;
+            object highValue;
+            double averageValue = rocket.AverageDeltaV();
+            object lowValueStage = rocket.LowestDeltaV(out lowValue);
+            object highValueStage = rocket.HighestDeltaV(out highValue);
+            return "↑: (" +
+                highValueStage.ToString() + ") " +
+                highValue.ToString() + "<br/>↓: (" +
+                lowValueStage.ToString() + ") " +
+                lowValue.ToString() + "<br/>↕: " +
+                averageValue.ToString() + " * " +
+                rocket.StageList.Count.ToString() + " = " +
+                rocket.TotalDeltaV().ToString();
         }
     }
 }
