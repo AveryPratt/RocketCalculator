@@ -1,2 +1,4 @@
-# KSP_Projects
-Projects designed to facilitate the gameplay of Kerbal Space Program
+# Rocket Calculator
+Rocket Calculator is a web-based application that I created to optimize rocket design. Whether you want to shoot off a real-life rocket or launch a design in a game such as Kerbal Space Program, Rocket Calculator will provide beneficial information regarding your vehicle's Δv, Isp, thrust, and thrust to weight ratio. 
+Furthermore, Rocket Calculator implements the KSP Library framework, which lets you answer more specific questions. For instance, on which planets and moons is it possible for your rocket to land and take off? Or, what is the maximum payload mass your rocket can deliver to low earth orbit?
+Rocket Calculator not only allows you to save the specifics of your design once you create a rocket, but also provides you with default rocket templates that you can modify. These include SpaceX's notorious Falcon 9, as well as the Saturn V and Lunar Lander from the Apollo program.
