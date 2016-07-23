@@ -54,7 +54,7 @@
                 </div>
                 <footer>
                     <p>
-                        Created by Avery Pratt, © 2016. View my <a href="https://github.com/AveryPratt">Github</a> profile.<br />
+                        Created by Avery Pratt, © 2016. View my <a href="https://github.com/AveryPratt">Github</a> page.<br />
                         Built using Microsoft <a href="http://www.asp.net/">ASP.NET</a>, <a href="https://azure.microsoft.com/en-us/">Azure</a>, and <a href="https://www.microsoft.com/en-us/download/details.aspx?id=42299">SQL Server</a>.<br />
                         Jebediah, Kerbal Space Program, and the names and properties of rocket templates and celestial bodies belong to <a href="http://www.squad.com.mx/">Squad</a>.
                     </p>
